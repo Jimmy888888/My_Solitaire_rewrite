@@ -1,6 +1,6 @@
 # My Solitaire rewrite
 
-#### flow chart
+### flow chart
 
 <!-- gfmd-start -->
 ```mermaid

@@ -19,6 +19,7 @@ F
 end
 
 sequenceDiagram
+    participant E
     Note right of E: Text in note
 ```
 

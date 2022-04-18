@@ -10,8 +10,7 @@ B -->C(Card 0)
 B -->D(Card 1)
 B -->E(Card 2)
 B -->F(Card N)
-graph LR
-E === F
+
 subgraph left 42 Puck Cards
 C
 D
@@ -19,4 +18,8 @@ E
 F
 end
 ```
+
+sequenceDiagram
+    participant John
+    Note right of John: Text in note
 <!-- gfmd-end -->

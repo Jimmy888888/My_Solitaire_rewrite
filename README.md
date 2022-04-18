@@ -6,6 +6,6 @@
   graph TD;
     A[Game Mod] -->B{Game Table};
     B -->C|Card|;
-    C -->C|Card1|;
-    C -->C|card2|;
+    B -->C|Card1|;
+    B -->C|card2|;
 ```

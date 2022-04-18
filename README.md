@@ -17,6 +17,9 @@ D
 E
 F
 end
+
+sequenceDiagram
+    Note right of E: Text in note
 ```
 
 ```mermaid

@@ -21,6 +21,7 @@ end
 sequenceDiagram
     participant G
     Note right of G: Text in note
+end
 ```
 
 ```mermaid

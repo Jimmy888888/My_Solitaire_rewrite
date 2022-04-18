@@ -4,5 +4,5 @@
 
 ```mermaid
   graph TD;
-    A[Game Mod] -->B[Game Table];
+    A[Game Mod] -->B{Game Table};
 ```

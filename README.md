@@ -10,8 +10,7 @@ B -->C(Card 0)
 B -->D(Card 1)
 B -->E(Card 2)
 B -->F(Card N)
-E ---F
-subgraph 42 Puck Cards
+subgraph left 42 Puck Cards
 C
 D
 E

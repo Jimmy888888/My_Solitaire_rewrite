@@ -1,2 +1,2 @@
-"# My_Solitaire_rewrite" 
+# My_Solitaire_rewrite
 test test

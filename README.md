@@ -19,7 +19,9 @@ F
 end
 ```
 
+```mermaid
 sequenceDiagram
     participant John
     Note right of John: Text in note
+```
 <!-- gfmd-end -->

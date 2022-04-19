@@ -2,6 +2,6 @@
 
 ### flow chart
 
-![plot](./object_type_1.png)
+<img src="./object_type_1.png" data-canonical-src="./object_type_1.png" width="600" height="400" />
 ![plot](./object_type_2.png)
-<img src="./object_type_1.png" data-canonical-src="./object_type_1.png" width="400" height="200" />
+

@@ -2,6 +2,6 @@
 
 ## Software Architecture graph
 
-<img src="./object_type_1.png" data-canonical-src="./object_type_1.png" width="800" height="500" />
+<img src="./object_type_1.png" data-canonical-src="./object_type_1.png" width="794" height="1123" />
 
 

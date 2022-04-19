@@ -2,15 +2,7 @@
 
 ### flow chart
 
-<!-- gfmd-start -->
-```mermaid
-graph TD
-A[Game Mod]
-```
+<img src="./object_type_1.png" data-canonical-src="./object_type_1.png" width="400" height="400" />
 
-```mermaid
-sequenceDiagram
-    participant John
-    Note right of John: Text in note
-```
-<!-- gfmd-end -->
+![plot](./object_type_2.png)
+

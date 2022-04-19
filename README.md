@@ -14,3 +14,4 @@ sequenceDiagram
     Note right of John: Text in note
 ```
 <!-- gfmd-end -->
+![plot](./object_type_1.png)

@@ -2,16 +2,5 @@
 
 ### flow chart
 
-<!-- gfmd-start -->
-```mermaid
-graph TD
-A[Game Mod]
-```
-
-```mermaid
-sequenceDiagram
-    participant John
-    Note right of John: Text in note
-```
-<!-- gfmd-end -->
 ![plot](./object_type_1.png)
+![plot](./object_type_2.png)

@@ -6,6 +6,6 @@ Here is a timer in this program and it will tall you how many time you take for 
 
 ## Software Architecture graph
 
-<img src="./Readme_graph1.png" data-canonical-src="./object_type_1.png" width="794" height="1123" />
+<img src="./Readme_graph1.png" data-canonical-src="./object_type_1.png" width="481" height="680" />
 
 

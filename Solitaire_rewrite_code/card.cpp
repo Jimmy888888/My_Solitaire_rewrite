@@ -23,8 +23,8 @@ void Card::mousePressEvent(QMouseEvent *event)
     this->turnfront();
     this->bool_isPressed = true;
     //record the pos when card is pressed
-    CardPos_pos.x = this->pos().x();
-    CardPos_pos.y = this->pos().y();
+    qpointf_bePressedPos.setX(this->pos().x());
+    qpointf_bePressedPos.setY(this->pos().y());
 }
 
 void Card::mouseReleaseEvent(QMouseEvent *event)

@@ -23,15 +23,15 @@ public:
     void mouseMoveEvent(QMouseEvent *event);
 
 private:
+    QList<QLabel *> qlist_cardSite;
+    QList<QRect> qlist_setCardSitePosAndsize;
+    QLabel *qlabel_cardSite;
     QList<Card *> qlist_cards;
     QList<SuitAndNumber> qlist_cardSuitsAndNumber;
-    QList<PosAndSize> qlist_setPosAndsize;
-    QList<QLabel *> qlist_cardSite;
-    QList<PosAndSize> qlist_setCardSitePosAndsize;
-    QLabel *qlabel_cardSite;
-    Card *card_tt;
-    int int_xfix = 0;
-    int int_yfix = 0;
+    QList<QRect> qlist_setPosAndsize;
+    Card *card_cardMake;
+    QPointF qpointf_fixpos, qpointf_movepos;
+    QList<QPointF> qpointf_cardSitePos;
     QString qstring_cardSuit[52] = {};
 
 };

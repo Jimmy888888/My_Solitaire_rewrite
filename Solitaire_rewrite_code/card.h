@@ -25,7 +25,7 @@ public:
     bool bool_isPressed = false;
     bool bool_cardPosFixable = true;
     int int_cardNumber;
-    CardPos CardPos_pos;
+    QPointF qpointf_bePressedPos;
     QPixmap qpixmap_cardFront;
     QPixmap qpixmap_cardBack;
 };

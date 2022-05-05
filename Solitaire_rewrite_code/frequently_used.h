@@ -3,16 +3,12 @@
 
 #include <QString>
 #include <QList>
+#include <QRect>
+#include <QPointF>
 #include <iostream>
 #include<fstream>
 #include <string>
 
-class CardPos
-{
-    public:
-        int x;
-        int y;
-};
 
 class SuitAndNumber
 {
@@ -21,23 +17,15 @@ class SuitAndNumber
         int int_num;
 };
 
-class PosAndSize
-{
-    public:
-        int x;
-        int y;
-        int width;
-        int height;
-        PosAndSize(int x,int y,int w,int h);
-};
-
 QString merge_filepath(QString x);
+
+QList<QRect> get_cardSitePosAndSize();
 
 QList<SuitAndNumber> get_cardsSuitsAndNumber();
 
-QList<PosAndSize> get_initalPosAndSize();
+QList<QRect> get_initalPosAndSize();
 
-QList<PosAndSize> get_cardSitePosAndSize();
+QList<QPointF> get_cardSitePos();
 
 #endif // FREQUENTLY_USED_H
 

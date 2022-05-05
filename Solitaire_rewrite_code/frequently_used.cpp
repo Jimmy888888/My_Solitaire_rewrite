@@ -9,6 +9,27 @@ QString merge_filepath(QString x)
     return z;
 }
 
+QList<QRect> get_cardSitePosAndSize()
+{
+    QList<QRect> qlist_posAndsize;
+    QRect qrect_startArea(10,20,110,160);
+    qlist_posAndsize << (qrect_startArea);
+
+    QRect qrect_areaOne(340,20,110,160);
+    qlist_posAndsize << (qrect_areaOne);
+
+    QRect qrect_areaTwo(470,20,110,160);
+    qlist_posAndsize << (qrect_areaTwo);
+
+    QRect qrect_areaThree(600,20,110,160);
+    qlist_posAndsize << (qrect_areaThree);
+
+    QRect qrect_areaFour(730,20,110,160);
+    qlist_posAndsize << (qrect_areaFour);
+
+    return qlist_posAndsize;
+}
+
 
 QList<SuitAndNumber> get_cardsSuitsAndNumber()
 {
@@ -39,63 +60,58 @@ QList<SuitAndNumber> get_cardsSuitsAndNumber()
     }
     else
     {
-//        qDebug() << "no such file" ;
+        //if readfile fail
     }
 
     return qlist_cardsSuitsAndNumber;
 }
 
-PosAndSize::PosAndSize(int x,int y,int w,int h)
-{
-    this->x = x;
-    this->y = y;
-    this->width = w;
-    this->height = h;
-}
 
-QList<PosAndSize> get_initalPosAndSize()
+QList<QRect> get_initalPosAndSize()
 {
-    QList<PosAndSize> qlist_posAndsize;
-    PosAndSize posAndSize_startArea(10,20,110,160);
+    QList<QRect> qlist_posAndsize;
+    QRect qrect_startArea(10,20,110,160);
 
     //48 cards have the same inital pos
     for(int i=0; i<48; i++)
     {
-        qlist_posAndsize << (posAndSize_startArea);
+        qlist_posAndsize << (qrect_startArea);
     }
 
-    PosAndSize posAndSize_areaOne(340,20,110,160);
-    qlist_posAndsize << (posAndSize_areaOne);
+    QRect qrect_areaOne(340,20,110,160);
+    qlist_posAndsize << (qrect_areaOne);
 
-    PosAndSize posAndSize_areaTwo(470,20,110,160);
-    qlist_posAndsize << (posAndSize_areaTwo);
+    QRect qrect_areaTwo(470,20,110,160);
+    qlist_posAndsize << (qrect_areaTwo);
 
-    PosAndSize posAndSize_areaThree(600,20,110,160);
-    qlist_posAndsize << (posAndSize_areaThree);
+    QRect qrect_areaThree(600,20,110,160);
+    qlist_posAndsize << (qrect_areaThree);
 
-    PosAndSize posAndSize_areaFour(730,20,110,160);
-    qlist_posAndsize << (posAndSize_areaFour);
+    QRect qrect_areaFour(730,20,110,160);
+    qlist_posAndsize << (qrect_areaFour);
 
     return qlist_posAndsize;
 }
 
-QList<PosAndSize> get_cardSitePosAndSize()
+
+QList<QPointF> get_cardSitePos()
 {
-    QList<PosAndSize> qlist_posAndsize;
-    PosAndSize posAndSize_startArea(10,20,110,160);
-    qlist_posAndsize << (posAndSize_startArea);
+    QList<QPointF> qlist_cardSitePos;
 
-    PosAndSize posAndSize_areaOne(340,20,110,160);
-    qlist_posAndsize << (posAndSize_areaOne);
+    QPointF qpointf_sitePosStart(10,20);
+    qlist_cardSitePos << (qpointf_sitePosStart);
 
-    PosAndSize posAndSize_areaTwo(470,20,110,160);
-    qlist_posAndsize << (posAndSize_areaTwo);
+    QPointF qpointf_sitePosOne(340,20);
+    qlist_cardSitePos << (qpointf_sitePosOne);
 
-    PosAndSize posAndSize_areaThree(600,20,110,160);
-    qlist_posAndsize << (posAndSize_areaThree);
+    QPointF qpointf_sitePosTwo(470,20);
+    qlist_cardSitePos << (qpointf_sitePosTwo);
 
-    PosAndSize posAndSize_areaFour(730,20,110,160);
-    qlist_posAndsize << (posAndSize_areaFour);
+    QPointF qpointf_sitePosThree(600,20);
+    qlist_cardSitePos << (qpointf_sitePosThree);
 
-    return qlist_posAndsize;
+    QPointF qpointf_sitePosFour(730,20);
+    qlist_cardSitePos << (qpointf_sitePosFour);
+
+    return qlist_cardSitePos;
 }

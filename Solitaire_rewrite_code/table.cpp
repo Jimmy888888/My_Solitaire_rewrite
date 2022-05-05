@@ -5,33 +5,35 @@ Table::Table(QWidget *parent)
 {
     this->setWindowTitle("Game Start");
     this->setWindowIcon( QIcon( merge_filepath("pictures/icon.png")));
-    this->setMinimumSize(400,700);
-    this->setMaximumSize(400,700);
+    this->setMinimumSize(900,700);
+    this->setMaximumSize(900,700);
     this->setStyleSheet("QMainWindow {background: 'green';}");
 
-    qlist_suits = get_cardsSuits();
-//    for(int i=0; i < qlist_suits.length(); i++)
-//    {
-//        qDebug() << qlist_suits[i];
-//    }
+    //access card site's pos and size, and make 5 card sites on table, and save card sites in qlabel_cardSite
+    qlist_setCardSitePosAndsize = get_cardSitePosAndSize();
+    QPixmap qpixmap_cardSite(merge_filepath("pictures/card_site.png"));
+    for(int i=0; i < qlist_setCardSitePosAndsize.length(); i++)
+    {
+        qlabel_cardSite = new QLabel(this);
+        qlabel_cardSite->setGeometry(qlist_setCardSitePosAndsize[i].x, qlist_setCardSitePosAndsize[i].y, qlist_setCardSitePosAndsize[i].width, qlist_setCardSitePosAndsize[i].height);
+        qlabel_cardSite->setPixmap(qpixmap_cardSite);
+        qlist_cardSite << qlabel_cardSite;
+    }
 
-    card_tt = new Card(this,qlist_suits[0]);
-    card_tt->setGeometry(10,100,110,160);
-    card_tt->show();
-    qlist_cards << (card_tt);
+    //access card's suit filename, and card's number
+    qlist_cardSuitsAndNumber = get_cardsSuitsAndNumber();
+    //access card's inital pos and size
+    qlist_setPosAndsize = get_initalPosAndSize();
 
-    card_tt =  new Card(this,qlist_suits[1]);
-    card_tt->setGeometry(100,100,110,160);
-    card_tt->show();
-    qlist_cards << (card_tt);
-
-    card_tt =  new Card(this,qlist_suits[2]);
-    card_tt->setGeometry(110,100,110,160);
-    card_tt->show();
-    qlist_cards << (card_tt);
-
-//randomly access the filename array
-//and build new class for setGeometry(x,y,w,h)
+    //generate 52 cards, and save cards in qlist_cards
+    for(int i=0; i< qlist_cardSuitsAndNumber.length(); i++)
+    {
+        card_tt = new Card(this,qlist_cardSuitsAndNumber[i].qstring_suit);
+        card_tt->int_cardNumber = qlist_cardSuitsAndNumber[i].int_num;
+        card_tt->setGeometry(qlist_setPosAndsize[i].x, qlist_setPosAndsize[i].y, qlist_setPosAndsize[i].width, qlist_setPosAndsize[i].height);
+        card_tt->show();
+        qlist_cards << (card_tt);
+    }
 
 }
 
@@ -65,7 +67,6 @@ void Table::mouseMoveEvent(QMouseEvent *event)
             qlist_cards[i]->move(event->pos().x()-int_xfix, event->pos().y()-int_yfix);
     //        qDebug() << "card" << qlist_cards[0]->pos();
 //            qDebug() << "table" << event->pos();
-
         }
     }
 

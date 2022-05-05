@@ -24,7 +24,11 @@ public:
 
 private:
     QList<Card *> qlist_cards;
-    QList<QString> qlist_suits;
+    QList<SuitAndNumber> qlist_cardSuitsAndNumber;
+    QList<PosAndSize> qlist_setPosAndsize;
+    QList<QLabel *> qlist_cardSite;
+    QList<PosAndSize> qlist_setCardSitePosAndsize;
+    QLabel *qlabel_cardSite;
     Card *card_tt;
     int int_xfix = 0;
     int int_yfix = 0;

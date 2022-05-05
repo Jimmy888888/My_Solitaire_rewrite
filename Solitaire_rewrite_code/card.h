@@ -13,9 +13,10 @@ class Card: public QLabel
 {
 public:
     Card(QMainWindow *parent, QString card_suit);
+    void turnfront();
+    void turnback();
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
-    QString qstring_cardBack = "pictures/card/red_back.png";
 
 
 public:
@@ -23,8 +24,10 @@ public:
     bool bool_isFront = false;
     bool bool_isPressed = false;
     bool bool_cardPosFixable = true;
+    int int_cardNumber;
     CardPos CardPos_pos;
-
+    QPixmap qpixmap_cardFront;
+    QPixmap qpixmap_cardBack;
 };
 
 #endif // CARD_H

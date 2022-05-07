@@ -22,6 +22,7 @@ public:
     void mouseReleaseEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
 
+
 private:
     QList<QLabel *> qlist_cardSite;
     QList<QRect> qlist_setCardSitePosAndsize;
@@ -31,8 +32,11 @@ private:
     QList<QRect> qlist_setPosAndsize;
     Card *card_cardMake;
     QPointF qpointf_fixpos, qpointf_movepos;
-    QList<QPointF> qpointf_cardSitePos;
-    QString qstring_cardSuit[52] = {};
+    QList<QPointF> qlist_cardSitePos;
+    QList<QPointF> qlist_cardPlacedPos;
+    CardBePressed CardBePressed_PCard;
+    int int_maxZorder;
+//    QString qstring_cardSuit[52] = {};
 
 };
 

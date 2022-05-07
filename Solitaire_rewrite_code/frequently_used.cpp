@@ -1,6 +1,30 @@
 #include "frequently_used.h"
 using namespace std;
 
+bool decide_IsOverlapping(QPointF qpointf_posOne, QPointF qpointf_posTwo)
+{
+    bool bool_IsOverlapping = false;
+    //every card's width=110 height=160, use qAbs() to judgu if two cards is overlapping
+    if( (qAbs(qpointf_posOne.x() - qpointf_posTwo.x()) <= 110) && (qAbs(qpointf_posOne.y() - qpointf_posTwo.y()) <= 160) )
+    {
+        bool_IsOverlapping = true;
+    }
+
+    return bool_IsOverlapping;
+}
+
+bool check_mousePosOnArea(QPointF qpointf_mousePos, QPointF qpointf_areaPos)
+{
+    bool bool_on = false;
+    if(qpointf_mousePos.x() >= qpointf_areaPos.x() && qpointf_mousePos.x() <= (qpointf_areaPos.x()+110)
+            && qpointf_mousePos.y() >= qpointf_areaPos.y() && qpointf_mousePos.y() <= (qpointf_areaPos.y()+160) )
+    {
+        bool_on = true;
+    }
+
+    return bool_on;
+}
+
 QString merge_filepath(QString x)
 {
     QString y = "C:/Users/88696/Desktop/Git_for_interview/Solitaire_rewrite/Solitaire_rewrite_code/";
@@ -14,6 +38,9 @@ QList<QRect> get_cardSitePosAndSize()
     QList<QRect> qlist_posAndsize;
     QRect qrect_startArea(10,20,110,160);
     qlist_posAndsize << (qrect_startArea);
+
+    QRect qrect_openArea(130,20,110,160);
+    qlist_posAndsize << (qrect_openArea);
 
     QRect qrect_areaOne(340,20,110,160);
     qlist_posAndsize << (qrect_areaOne);
@@ -98,8 +125,11 @@ QList<QPointF> get_cardSitePos()
 {
     QList<QPointF> qlist_cardSitePos;
 
-    QPointF qpointf_sitePosStart(10,20);
-    qlist_cardSitePos << (qpointf_sitePosStart);
+//    QPointF qpointf_sitePosStart(10,20);
+//    qlist_cardSitePos << (qpointf_sitePosStart);
+
+//    QPointF qpointf_sitePosOpne(130,20);
+//    qlist_cardSitePos << (qpointf_sitePosOpne);
 
     QPointF qpointf_sitePosOne(340,20);
     qlist_cardSitePos << (qpointf_sitePosOne);

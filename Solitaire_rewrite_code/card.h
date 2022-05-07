@@ -12,22 +12,26 @@
 class Card: public QLabel
 {
 public:
-    Card(QMainWindow *parent, QString card_suit);
+    Card(QMainWindow *parent, QString card_suit, int int_cardNum, int int_initalX, int int_initalY, int int_initalZ);
     void turnfront();
     void turnback();
-    void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
+//    void mousePressEvent(QMouseEvent *event);
 
 
 public:
-    QString qstring_cardSuit;
+//    QString qstring_cardSuit;
     bool bool_isFront = false;
     bool bool_isPressed = false;
-    bool bool_cardPosFixable = true;
+    bool bool_PosFixable = true;
+    bool bool_moveabel = false;
     int int_cardNumber;
+    int int_Zorder;
+    int int_upperCard = -1;
+    int int_lowerCard = -1;
     QPointF qpointf_bePressedPos;
     QPixmap qpixmap_cardFront;
     QPixmap qpixmap_cardBack;
+
 };
 
 #endif // CARD_H

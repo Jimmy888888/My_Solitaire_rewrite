@@ -47,7 +47,7 @@ Table::Table(QWidget *parent)
 
 void Table::mousePressEvent(QMouseEvent *event)
 {
-    qDebug() << "table Press";
+    //qDebug() << "table Press";
 
     //check whether card is press
     CardBePressed_PCard.int_Zorder = -1;
@@ -95,28 +95,46 @@ void Table::mouseReleaseEvent(QMouseEvent *event)
         bool bool_emptyPlace = true;
         if(qlist_cards[i]->bool_isPressed == true && qlist_cards[i]->bool_moveabel == true)
         {
-            //chick if card is overlapping with 1 of any 4 cards site
+            //chick if card is overlapping with 1 of any 4 cardPlacedPos
             for(int j=0; j < qlist_cardPlacedPos.length(); j++)
             {
                 if( decide_IsOverlapping(qlist_cards[i]->pos(), qlist_cardPlacedPos[j]) == true )
                 {
-                    //place the overlapping card (qlist_cardPlacedPos[j].y() + 25)
+                    //place the overlapping card on qlist_cardPlacedPos[j] under 25
                     qlist_cards[i]->move(qlist_cardPlacedPos[j].x(), qlist_cardPlacedPos[j].y() + 25);
                     for(int k=0; k < qlist_cards.length(); k++)
                     {
-                        //check whether there is another card overlapping on qlist_cardPlacedPos[j]
+                        //check whether is there any card on qlist_cardPlacedPos[j]
                         if(qlist_cards[k]->bool_isPressed == false && qlist_cards[k]->pos() == qlist_cardPlacedPos[j] )
                         {
+                            /*check whether card that on (qlist_cardPlacedPos[j].x(), qlist_cardPlacedPos[j].y() + 25)
+                            can match card that on (qlist_cardPlacedPos[j].x(), qlist_cardPlacedPos[j].y() ) */
+                            if( (qlist_cards[i]->int_cardNumber % 13) - (qlist_cards[k]->int_cardNumber % 13) == -1 )
+                            {
+                                //0 12    13 25    26 38    39 51
+                                //0  1  0  14  0  27  0  40
+                                //13 1  13 14  13 27  13 40
+                                //result :
+                                //if (qlist_cards[i]->int_cardNumber % 13) - (qlist_cards[k]->int_cardNumber % 13) == -1
+                                //then qlist_cards[i] match qlist_cards[k]
+                                qlist_cards[i]->int_lowerCardNum = qlist_cards[k]->int_cardNumber;
+                                qlist_cards[k]->int_upperCardNum = qlist_cards[i]->int_cardNumber;
+                                bool_canNotPlaced = false;
+                            }
+
+
                             bool_emptyPlace = false;
-//                            qDebug() << qlist_cardPlacedPos;
-                            bool_canNotPlaced = false;
+                            //qDebug() << qlist_cardPlacedPos;
+
                         }
                     }
                     //if there is no another card on qlist_cardPlacedPos[j], place the overlapping card on qlist_cardPlacedPos[j]
                     if(qlist_cards[i]->bool_isPressed == true && qlist_cardPlacedPos[j].y() == 20 && bool_emptyPlace == true)
                     {
                         qlist_cards[i]->move(qlist_cardPlacedPos[j].x(), qlist_cardPlacedPos[j].y() );
-//                            qDebug() << qlist_cardPlacedPos
+                        qlist_cards[i]->int_upperCardNum = -1;
+                        qlist_cards[i]->int_lowerCardNum = -1;
+                        //qDebug() << qlist_cards[i]->int_cardNumber;
                         bool_canNotPlaced = false;
                     }
 

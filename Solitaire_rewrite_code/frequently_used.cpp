@@ -62,7 +62,7 @@ QList<SuitAndNumber> get_cardsSuitsAndNumber()
 {
     QList<SuitAndNumber> qlist_cardsSuitsAndNumber;
     SuitAndNumber SuitAndNumber_temp;
-    int int_num = 1, int_random = 0;
+    int int_num = 0, int_random = 0;
     ifstream fileread("C:/Users/88696/Desktop/Git_for_interview/Solitaire_rewrite/Solitaire_rewrite_code/pictures/card_suits.txt");
 
     if(fileread)

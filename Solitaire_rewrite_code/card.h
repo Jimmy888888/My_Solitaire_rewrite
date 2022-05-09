@@ -26,8 +26,8 @@ public:
     bool bool_moveabel = false;
     int int_cardNumber;
     int int_Zorder;
-    int int_upperCard = -1;
-    int int_lowerCard = -1;
+    int int_upperCardNum = -1;
+    int int_lowerCardNum = -1;
     QPointF qpointf_bePressedPos;
     QPixmap qpixmap_cardFront;
     QPixmap qpixmap_cardBack;

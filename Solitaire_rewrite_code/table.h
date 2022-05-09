@@ -34,8 +34,8 @@ private:
     QPointF qpointf_fixpos, qpointf_movepos;
     QList<QPointF> qlist_cardSitePos;
     QList<QPointF> qlist_cardPlacedPos;
-    CardBePressed CardBePressed_PCard;
-    int int_maxZorder;
+    CardBePressed CardBePressed_PressedCard;
+    int int_maxZorder = 52;
 //    QString qstring_cardSuit[52] = {};
 
 };

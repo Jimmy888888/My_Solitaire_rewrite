@@ -38,7 +38,7 @@ Table::Table(QWidget *parent)
         qlist_cards << (card_cardMake);
     }
 
-    int_maxZorder = 51;
+    //int_maxZorder = 52;
 
     //access 4 cards site's pos
     qlist_cardSitePos = get_cardSitePos();
@@ -50,21 +50,25 @@ void Table::mousePressEvent(QMouseEvent *event)
     //qDebug() << "table Press";
 
     //check whether card is press
-    CardBePressed_PCard.int_Zorder = -1;
+    CardBePressed_PressedCard.int_Zorder = -1;
     for(int i=0; i < qlist_cards.length(); i++)
     {
+        //check how many cards are on the mouse pressed pos
         if( check_mousePosOnArea(event->pos(), qlist_cards[i]->pos()) == true )
         {
-            if(CardBePressed_PCard.int_Zorder <= qlist_cards[i]->int_Zorder)
+            //only the biggest Zorder card can be choosen
+            if(CardBePressed_PressedCard.int_Zorder <= qlist_cards[i]->int_Zorder)
             {
-                CardBePressed_PCard.int_Zorder = qlist_cards[i]->int_Zorder;
-                CardBePressed_PCard.int_NumInCardList = i;
+                CardBePressed_PressedCard.int_Zorder = qlist_cards[i]->int_Zorder;
+                CardBePressed_PressedCard.int_NumInCardList = i;
             }
         }
     }
-    if(CardBePressed_PCard.int_Zorder >= 0 )
+
+    //Zorder >=0 means card is br pressed, set card state
+    if(CardBePressed_PressedCard.int_Zorder >= 0 )
     {
-        int i = CardBePressed_PCard.int_NumInCardList;
+        int i = CardBePressed_PressedCard.int_NumInCardList;
         int_maxZorder++;
         qlist_cards[i]->qpointf_bePressedPos = qlist_cards[i]->pos();
         qlist_cards[i]->bool_isPressed = true;
@@ -72,13 +76,30 @@ void Table::mousePressEvent(QMouseEvent *event)
         qlist_cards[i]->int_Zorder = int_maxZorder;
         qlist_cards[i]->raise();
         qlist_cards[i]->turnfront();
-//        qDebug() << qlist_cards[i]->pos() << qlist_cards[i]->int_cardNumber << qlist_cards[i]->int_Zorder;
 
         //decide whether card is moveabel
         if(qlist_cards[i]->pos() == QPointF(10,20))
         {
             qlist_cards[i]->bool_moveabel = false;
             qlist_cards[i]->move(130,20);
+        }
+    }
+    //CardBePressed_PressedCard.int_Zorder == -1 means no cards is be pressed
+    else if(CardBePressed_PressedCard.int_Zorder == -1)
+    {
+        //if mouse press card start area (10,20)
+        if( check_mousePosOnArea(event->pos(), QPointF(10,20)) == true )
+        {
+            //put cards that on (130,20) back to (10,20)
+            for(int i=0; i < qlist_cards.length(); i++)
+            {
+                if( qlist_cards[i]->pos() == QPointF(130,20))
+                {
+                    qlist_cards[i]->move(10,20);
+                    qlist_cards[i]->turnback();
+
+                }
+            }
         }
     }
 }

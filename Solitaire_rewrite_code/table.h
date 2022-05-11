@@ -34,9 +34,10 @@ private:
     QList<PosSizeUpLow> qlist_setPosSizeUpLow;
     Card *card_cardMake;
     QList<Card *> qlist_cards;
-    QPointF qpointf_fixpos, qpointf_movepos;
+    QList<QPointF> qlist_movepos, qlist_fixpos;
     QList<QPointF> qlist_PlaceCardPos;
     CardBePressed CardBePressed_PressedCard;
+    QList<int> qlist_MoveAbelCards;
     int int_maxZorder = 52;
 
 };

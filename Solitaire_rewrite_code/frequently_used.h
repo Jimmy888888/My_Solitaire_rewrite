@@ -28,8 +28,8 @@ class CardBePressed
 class WidHei
 {
     public:
-        int width;
-        int height;
+        int int_width;
+        int int_height;
         WidHei(int w, int h);
 };
 

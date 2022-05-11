@@ -15,11 +15,8 @@ public:
     Card(QMainWindow *parent, QString card_suit, int int_cardNum, int int_initalX, int int_initalY, int int_initalZ, int int_upper, int int_lower);
     void turnfront();
     void turnback();
-//    void mousePressEvent(QMouseEvent *event);
-
 
 public:
-//    QString qstring_cardSuit;
     bool bool_isFront = false;
     bool bool_isPressed = false;
     bool bool_PosFixable = true;

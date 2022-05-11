@@ -31,45 +31,38 @@ Table::Table(QWidget *parent)
 
     //access card's suit filename, and card's number
     qlist_cardSuitsAndNumber = get_cardsSuitsAndNumber();
-    //access card's inital pos and size
+    //access card's inital pos and size and upper card num and lower card num
     qlist_setPosSizeUpLow = get_CardsInitalPosSizeUpLow(qlist_StartCardsPos, qlist_PlayCardsPos, widhei_cardSize);
 
-    int int_upperCard = -1;
-    int int_lowerCard = -1;
     int int_initialZorder = 0;
     //generate 52 cards, and save cards in qlist_cards
     for(int i=0; i< qlist_cardSuitsAndNumber.length(); i++)
     {
         int_initialZorder = i;
-        int_upperCard = qlist_setPosSizeUpLow[i].uplow_ul.int_upper;
-        int_lowerCard = qlist_setPosSizeUpLow[i].uplow_ul.int_lower;
-        if(qlist_setPosSizeUpLow[i].uplow_ul.int_upper != -1)
-        {
-            int_upperCard = qlist_cardSuitsAndNumber[i+1].int_num;
-        }
-        if(qlist_setPosSizeUpLow[i].uplow_ul.int_lower != -1)
-        {
-            int_lowerCard = qlist_cardSuitsAndNumber[i-1].int_num;
-        }
+
         card_cardMake =
-            new Card(this, qlist_cardSuitsAndNumber[i].qstring_suit, qlist_cardSuitsAndNumber[i].int_num,
-                     qlist_setPosSizeUpLow[i].qrect_posSize.x(), qlist_setPosSizeUpLow[i].qrect_posSize.y(),
-                     int_initialZorder, int_upperCard, int_lowerCard);
+            new Card(this,
+                     qlist_cardSuitsAndNumber[i].qstring_suit,
+                     qlist_cardSuitsAndNumber[i].int_num,
+                     qlist_setPosSizeUpLow[i].qrect_posSize.x(),
+                     qlist_setPosSizeUpLow[i].qrect_posSize.y(),
+                     int_initialZorder,
+                     qlist_setPosSizeUpLow[i].uplow_ul.int_upper,
+                     qlist_setPosSizeUpLow[i].uplow_ul.int_lower);
+
         card_cardMake->setGeometry(qlist_setPosSizeUpLow[i].qrect_posSize);
         card_cardMake->show();
         qlist_cards << (card_cardMake);
-        qDebug() << card_cardMake->qpointf_bePressedPos << " " << i  << " " <<card_cardMake->int_cardNumber << " " <<  card_cardMake->int_upperCardNum<< " " << card_cardMake->int_lowerCardNum;
+        //qDebug() << card_cardMake->qpointf_bePressedPos << " " << i  << " " <<card_cardMake->int_cardNumber << " " <<
+        //            card_cardMake->int_upperCardNum<< " " << card_cardMake->int_lowerCardNum << card_cardMake->bool_isFront;
     }
 
     //access 7 cards site's pos
-//    qlist_cardSitePos = get_PlayCardsPos();
-    qlist_cardPlacedPos = get_PlayCardsPos();
+    qlist_PlaceCardPos = get_PlayCardsPos();
 }
 
 void Table::mousePressEvent(QMouseEvent *event)
 {
-    //qDebug() << "table Press";
-
     //check is any card be pressed
     CardBePressed_PressedCard.int_Zorder = -1;
     for(int i=0; i < qlist_cards.length(); i++)
@@ -80,13 +73,18 @@ void Table::mousePressEvent(QMouseEvent *event)
             //only the biggest Zorder card can be choosen
             if(CardBePressed_PressedCard.int_Zorder <= qlist_cards[i]->int_Zorder)
             {
-                CardBePressed_PressedCard.int_Zorder = qlist_cards[i]->int_Zorder;
-                CardBePressed_PressedCard.int_NumInCardList = i;
+                //qlist_cards[i]->int_upperCardNum == -1 means no card place on qlist_cards[i]
+                if(qlist_cards[i]->int_upperCardNum == -1)
+                {
+                    CardBePressed_PressedCard.int_Zorder = qlist_cards[i]->int_Zorder;
+                    CardBePressed_PressedCard.int_NumInCardList = i;
+                }
+
             }
         }
     }
 
-    //Zorder >=0 means card is be pressed, set card state
+    //CardBePressed_PressedCard.Zorder >=0 means card is be pressed, set card state
     if(CardBePressed_PressedCard.int_Zorder >= 0 )
     {
         int i = CardBePressed_PressedCard.int_NumInCardList;
@@ -94,6 +92,7 @@ void Table::mousePressEvent(QMouseEvent *event)
         qlist_cards[i]->qpointf_bePressedPos = qlist_cards[i]->pos();
         qlist_cards[i]->bool_isPressed = true;
         qlist_cards[i]->bool_moveabel = true;
+        qlist_cards[i]->bool_isFront = true;
         qlist_cards[i]->int_Zorder = int_maxZorder;
         qlist_cards[i]->raise();
         qlist_cards[i]->turnfront();
@@ -108,11 +107,11 @@ void Table::mousePressEvent(QMouseEvent *event)
     //CardBePressed_PressedCard.int_Zorder == -1 means no cards is be pressed
     else if(CardBePressed_PressedCard.int_Zorder == -1)
     {
-        //if mouse press card start area (65,20)
+        //if mouse press card start area qlist_StartCardsPos[0] (65,20)
         if( check_mousePosOnArea(event->pos(), qlist_StartCardsPos[0]) == true )
         {
-            //put cards that on (130,20) back to (65,20),
-            //and for keeping cards zorder, raise() cards int_Zorder
+            //put cards that on qlist_StartCardsPos[1] (225,20) back to qlist_StartCardsPos[0] (65,20),
+            //and for keeping cards zorder, do raise() and increase cards int_Zorder
             for(int i=0; i < qlist_cards.length(); i++)
             {
                 if( qlist_cards[i]->pos() == qlist_StartCardsPos[1])
@@ -121,6 +120,7 @@ void Table::mousePressEvent(QMouseEvent *event)
                     qlist_cards[i]->move(qlist_StartCardsPos[0].x(), qlist_StartCardsPos[0].y());
                     qlist_cards[i]->turnback();
                     qlist_cards[i]->raise();
+                    qlist_cards[i]->bool_isFront = false;
                     qlist_cards[i]->int_Zorder = int_maxZorder;
                 }
             }
@@ -130,76 +130,89 @@ void Table::mousePressEvent(QMouseEvent *event)
 
 void Table::mouseReleaseEvent(QMouseEvent *event)
 {
-//    qDebug() << "table Release";
+    //update qlist_PlaceCardPos
+    qlist_PlaceCardPos = get_PlayCardsPos();
+    //intArray_PlaceCardNum recorder card order num that in qlist_cards for every qlist_PlaceCardPos
+    int intArray_PlaceCardNum[7];
+    //initialize intArray_PlaceCardNum, -1 means no card
+    std::fill_n(intArray_PlaceCardNum, 7, -1);
 
-    //decide where cards can be placed
-
-    //update qlist_cardPlacedPos
-    qlist_cardPlacedPos = get_PlayCardsPos();
+    //record the uppermost card pos for every qlist_PlaceCardPos[j]
     for(int i=0; i < qlist_cards.length(); i++)
     {
-        for(int j=0; j < qlist_cardPlacedPos.length(); j++)
+        for(int j=0; j < qlist_PlaceCardPos.length(); j++)
         {
-            if( qlist_cards[i]->pos().x() == qlist_cardPlacedPos[j].x())
+            if( qlist_cards[i]->pos().x() == qlist_PlaceCardPos[j].x())
             {
-                if( qlist_cards[i]->pos().y() >= qlist_cardPlacedPos[j].y())
+                if( qlist_cards[i]->pos().y() >= qlist_PlaceCardPos[j].y())
                 {
-                    qlist_cardPlacedPos[j] = qlist_cards[i]->pos();
+                    //record the uppermost card pos for every qlist_PlaceCardPos[j]
+                    qlist_PlaceCardPos[j] = qlist_cards[i]->pos();
+                    //also record card order num that in qlist_cards
+                    intArray_PlaceCardNum[j] = i;
                 }
             }
         }
     }
 
-    //add check number
+    //
     for(int i=0; i < qlist_cards.length(); i++)
     {
         bool bool_canNotPlaced = true;
-        bool bool_emptyPlace = true;
+
         if(qlist_cards[i]->bool_isPressed == true && qlist_cards[i]->bool_moveabel == true)
         {
             //chick if card is overlapping with 1 of any 4 cardPlacedPos
-            for(int j=0; j < qlist_cardPlacedPos.length(); j++)
+            for(int j=0; j < qlist_PlaceCardPos.length(); j++)
             {
-                if( decide_IsOverlapping(qlist_cards[i]->pos(), qlist_cardPlacedPos[j]) == true )
+                if( decide_IsOverlapping(qlist_cards[i]->pos(), qlist_PlaceCardPos[j]) == true )
                 {
-                    //place the overlapping card on qlist_cardPlacedPos[j] under 25
-                    qlist_cards[i]->move(qlist_cardPlacedPos[j].x(), qlist_cardPlacedPos[j].y() + 25);
-                    for(int k=0; k < qlist_cards.length(); k++)
+                    //means no card on qlist_PlaceCardPos[j]
+                    if(intArray_PlaceCardNum[j] == -1)
                     {
-                        //check whether is there any card on qlist_cardPlacedPos[j]
-                        if(qlist_cards[k]->bool_isPressed == false && qlist_cards[k]->pos() == qlist_cardPlacedPos[j] )
+                        //if there is no card on qlist_PlaceCardPos[j], place the overlapping card on qlist_PlaceCardPos[j]
+                        if(qlist_cards[i]->bool_isPressed == true && qlist_PlaceCardPos[j].y() == qlist_PlayCardsPos[0].y())
                         {
-                            /*check whether card that on (qlist_cardPlacedPos[j].x(), qlist_cardPlacedPos[j].y() + 25)
-                            can match card that on (qlist_cardPlacedPos[j].x(), qlist_cardPlacedPos[j].y() ) */
-                            if( (qlist_cards[i]->int_cardNumber % 13) - (qlist_cards[k]->int_cardNumber % 13) == -1 )
+                            //set qlist_cards[i]->int_lowerCardNum upper =-1
+                            if(qlist_cards[i]->int_lowerCardNum >= 0)
                             {
-                                //0 12    13 25    26 38    39 51
-                                //0  1  0  14  0  27  0  40
-                                //13 1  13 14  13 27  13 40
-                                //result :
-                                //if (qlist_cards[i]->int_cardNumber % 13) - (qlist_cards[k]->int_cardNumber % 13) == -1
-                                //then qlist_cards[i] match qlist_cards[k]
-                                qlist_cards[i]->int_lowerCardNum = qlist_cards[k]->int_cardNumber;
-                                qlist_cards[k]->int_upperCardNum = qlist_cards[i]->int_cardNumber;
-                                bool_canNotPlaced = false;
+                                qlist_cards[ qlist_cards[i]->int_lowerCardNum ]->int_upperCardNum = -1;
                             }
-
-
-                            bool_emptyPlace = false;
-                            //qDebug() << qlist_cardPlacedPos;
-
+                            qlist_cards[i]->move(qlist_PlaceCardPos[j].x(), qlist_PlaceCardPos[j].y() );
+                            qlist_cards[i]->int_upperCardNum = -1;
+                            qlist_cards[i]->int_lowerCardNum = -1;
+                            //qDebug() << qlist_cards[i]->int_cardNumber;
+                            bool_canNotPlaced = false;
                         }
                     }
-                    //if there is no another card on qlist_cardPlacedPos[j], place the overlapping card on qlist_cardPlacedPos[j]
-                    if(qlist_cards[i]->bool_isPressed == true && qlist_cardPlacedPos[j].y() == 20 && bool_emptyPlace == true)
+                    //means there is card on qlist_PlaceCardPos[j]
+                    else if(intArray_PlaceCardNum[j] >= 0)
                     {
-                        qlist_cards[i]->move(qlist_cardPlacedPos[j].x(), qlist_cardPlacedPos[j].y() );
-                        qlist_cards[i]->int_upperCardNum = -1;
-                        qlist_cards[i]->int_lowerCardNum = -1;
-                        //qDebug() << qlist_cards[i]->int_cardNumber;
-                        bool_canNotPlaced = false;
-                    }
+                        /*check whether card that on (qlist_PlaceCardPos[j].x(), qlist_PlaceCardPos[j].y() + 25)
+                        can match card that on (qlist_PlaceCardPos[j].x(), qlist_PlaceCardPos[j].y() ) */
+                        if( (qlist_cards[i]->int_cardNumber % 13) - (qlist_cards[intArray_PlaceCardNum[j]]->int_cardNumber % 13) == -1 )
+                        {
+                            //0 12    13 25    26 38    39 51
+                            //0  1  0  14  0  27  0  40
+                            //13 1  13 14  13 27  13 40
+                            //result :
+                            //if (qlist_cards[i]->int_cardNumber % 13) - (qlist_cards[k]->int_cardNumber % 13) == -1
+                            //then qlist_cards[i] match qlist_cards[k]
 
+                            //set card that lower than qlist_cards[i] previously upper =-1
+                            if(qlist_cards[i]->int_lowerCardNum >= 0)
+                            {
+                                qlist_cards[ qlist_cards[i]->int_lowerCardNum ]->int_upperCardNum = -1;
+                            }
+                            qlist_cards[i]->move(qlist_PlaceCardPos[j].x(), qlist_PlaceCardPos[j].y() + 25);
+                            qlist_cards[i]->int_lowerCardNum = intArray_PlaceCardNum[j];
+                            qlist_cards[intArray_PlaceCardNum[j]]->int_upperCardNum = i;
+
+                            bool_canNotPlaced = false;
+
+                        }
+                        //qDebug() << qlist_PlaceCardPos;
+                    }
                     break;
                 }
             }
@@ -210,9 +223,6 @@ void Table::mouseReleaseEvent(QMouseEvent *event)
             }
         }
     }
-
-
-//    qDebug() << qlist_cardPlacedPos;
 
     //reset cards states
     for(int i=0; i < qlist_cards.length(); i++)

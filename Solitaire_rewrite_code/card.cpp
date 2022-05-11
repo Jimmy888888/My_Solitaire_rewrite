@@ -23,15 +23,7 @@ void Card::turnback()
     this->setPixmap(qpixmap_cardBack);
 }
 
-//void Card::mousePressEvent(QMouseEvent *event)
-//{
-//    this->turnfront();
-//    this->bool_isPressed = true;
-//    this->raise();
 
-//    //record the pos when card is pressed
-//    qpointf_bePressedPos = this->pos();
-//}
 
 
 

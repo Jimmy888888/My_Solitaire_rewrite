@@ -3,8 +3,8 @@ using namespace std;
 
 WidHei::WidHei(int w, int h)
 {
-    width = w;
-    height = h;
+    int_width = w;
+    int_height = h;
 }
 
 PosSizeUpLow::PosSizeUpLow(int x, int y, int w, int h, int up, int low)
@@ -115,12 +115,14 @@ QList<QPointF> get_PlayCardsPos()
 QList<PosSizeUpLow> get_CardsInitalPosSizeUpLow( QList<QPointF> qlist_startCardPos, QList<QPointF> qlist_playCardsPos, WidHei widhei_cardSize)
 {
     QList<PosSizeUpLow> qlist_PosSizeUpLow;
+    int int_cardOrderInQlist=0;
 
     //24 cards have the same inital pos, and the same (upper, lower) = (-1, -1)
-    PosSizeUpLow posSizeUpLow_startArea(qlist_startCardPos[0].x(), qlist_startCardPos[0].y(), widhei_cardSize.width , widhei_cardSize.height, -1, -1);
+    PosSizeUpLow posSizeUpLow_startArea(qlist_startCardPos[0].x(), qlist_startCardPos[0].y(), widhei_cardSize.int_width , widhei_cardSize.int_height, -1, -1);
     for(int i=0; i<24; i++)
     {
         qlist_PosSizeUpLow << (posSizeUpLow_startArea);
+        int_cardOrderInQlist++;
     }
 
     //qlist_playCardsPos[0] has 1 card, qlist_playCardsPos[1] has two cards, qlist_playCardsPos[2] has three cars,and so on
@@ -128,12 +130,14 @@ QList<PosSizeUpLow> get_CardsInitalPosSizeUpLow( QList<QPointF> qlist_startCardP
     int int_low = 0;
     for(int i=0; i < qlist_playCardsPos.length(); i++)
     {
-        PosSizeUpLow posSizeUpLow_playArea(qlist_playCardsPos[i].x(), qlist_playCardsPos[i].y(), widhei_cardSize.width , widhei_cardSize.height, int_up, int_low);
+        PosSizeUpLow posSizeUpLow_playArea(qlist_playCardsPos[i].x(), qlist_playCardsPos[i].y(), widhei_cardSize.int_width , widhei_cardSize.int_height, int_up, int_low);
         for(int j=0; j <= i; j++)
         {
-            //reset
-            int_up = 0;
-            int_low = 0;
+            //int_up record previous card order in qlist
+            int_up = int_cardOrderInQlist + 1;
+            //int_low record next card order in qlist
+            int_low = int_cardOrderInQlist - 1;
+            int_cardOrderInQlist++;
             //first pos of qlist_playCardsPos[i]
             if(j == 0)
             {
@@ -197,13 +201,13 @@ QList<QRect> get_cardSitePosAndSize( QList<QPointF> qlist_startCardPos, QList<QP
 
     for(int i=0; i < qlist_startCardPos.length(); i++)
     {
-        QRect qrect_startArea(qlist_startCardPos[i].x(), qlist_startCardPos[i].y(), widhei_cardSize.width , widhei_cardSize.height);
+        QRect qrect_startArea(qlist_startCardPos[i].x(), qlist_startCardPos[i].y(), widhei_cardSize.int_width , widhei_cardSize.int_height);
         qlist_posAndsize << (qrect_startArea);
     }
 
     for(int i=0; i < qlist_stackCardsPos.length(); i++)
     {
-        QRect qrect_stackArea(qlist_stackCardsPos[i].x(), qlist_stackCardsPos[i].y(), widhei_cardSize.width , widhei_cardSize.height);
+        QRect qrect_stackArea(qlist_stackCardsPos[i].x(), qlist_stackCardsPos[i].y(), widhei_cardSize.int_width , widhei_cardSize.int_height);
         qlist_posAndsize << (qrect_stackArea);
     }
     return qlist_posAndsize;

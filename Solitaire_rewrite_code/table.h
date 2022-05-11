@@ -24,15 +24,18 @@ public:
 
 
 private:
-    QList<QLabel *> qlist_cardSite;
+    QList<QPointF> qlist_StartCardsPos;
+    QList<QPointF> qlist_StackCardsPos;
+    QList<QPointF> qlist_PlayCardsPos;
     QList<QRect> qlist_setCardSitePosAndsize;
     QLabel *qlabel_cardSite;
-    QList<Card *> qlist_cards;
+    QList<QLabel *> qlist_cardSite;
     QList<SuitAndNumber> qlist_cardSuitsAndNumber;
-    QList<QRect> qlist_setPosAndsize;
+    QList<PosSizeUpLow> qlist_setPosSizeUpLow;
     Card *card_cardMake;
+    QList<Card *> qlist_cards;
     QPointF qpointf_fixpos, qpointf_movepos;
-    QList<QPointF> qlist_cardSitePos;
+//    QList<QPointF> qlist_cardSitePos;
     QList<QPointF> qlist_cardPlacedPos;
     CardBePressed CardBePressed_PressedCard;
     int int_maxZorder = 52;

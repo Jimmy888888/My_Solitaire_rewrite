@@ -1,6 +1,6 @@
 #include "card.h"
 
-Card::Card(QMainWindow *parent, QString card_suit, int int_cardNum, int int_initalX, int int_initalY, int int_initalZ)
+Card::Card(QMainWindow *parent, QString card_suit, int int_cardNum, int int_initalX, int int_initalY, int int_initalZ, int int_upper, int int_lower)
 {
     this->setParent(parent);
     qpixmap_cardFront = QPixmap( merge_filepath( card_suit));
@@ -8,6 +8,8 @@ Card::Card(QMainWindow *parent, QString card_suit, int int_cardNum, int int_init
     int_cardNumber = int_cardNum;
     qpointf_bePressedPos = QPointF(int_initalX, int_initalY);
     int_Zorder = int_initalZ;
+    int_upperCardNum = int_upper;
+    int_lowerCardNum = int_lower;
     this->setPixmap(qpixmap_cardBack);
 }
 

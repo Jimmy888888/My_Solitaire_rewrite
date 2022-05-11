@@ -5,13 +5,20 @@ Table::Table(QWidget *parent)
 {
     this->setWindowTitle("Game Start");
     this->setWindowIcon( QIcon( merge_filepath("pictures/icon.png")));
-    this->setMinimumSize(900,700);
-    this->setMaximumSize(900,700);
+    this->setMinimumSize(1200,900);
+    this->setMaximumSize(1200,900);
     this->setStyleSheet("QMainWindow {background: 'green';}");
 
+    //access three kinds cards pos
+    qlist_StartCardsPos = get_StartCardsPos();
+    qlist_StackCardsPos = get_StackCardsPos();
+    qlist_PlayCardsPos = get_PlayCardsPos();
+    //access cardSize
+    WidHei widhei_cardSize = WidHei(110, 160);
 
-    //access card site's pos and size, and make 5 card sites on table, and save card sites in qlabel_cardSite
-    qlist_setCardSitePosAndsize = get_cardSitePosAndSize();
+
+    //access card site's pos and size, and make 6 card sites on table, and save card sites in qlabel_cardSite
+    qlist_setCardSitePosAndsize = get_cardSitePosAndSize(qlist_StartCardsPos, qlist_StackCardsPos, widhei_cardSize);
     QPixmap qpixmap_cardSite(merge_filepath("pictures/card_site.png"));
     for(int i=0; i < qlist_setCardSitePosAndsize.length(); i++)
     {
@@ -25,31 +32,45 @@ Table::Table(QWidget *parent)
     //access card's suit filename, and card's number
     qlist_cardSuitsAndNumber = get_cardsSuitsAndNumber();
     //access card's inital pos and size
-    qlist_setPosAndsize = get_initalPosAndSize();
+    qlist_setPosSizeUpLow = get_CardsInitalPosSizeUpLow(qlist_StartCardsPos, qlist_PlayCardsPos, widhei_cardSize);
 
+    int int_upperCard = -1;
+    int int_lowerCard = -1;
+    int int_initialZorder = 0;
     //generate 52 cards, and save cards in qlist_cards
     for(int i=0; i< qlist_cardSuitsAndNumber.length(); i++)
     {
+        int_initialZorder = i;
+        int_upperCard = qlist_setPosSizeUpLow[i].uplow_ul.int_upper;
+        int_lowerCard = qlist_setPosSizeUpLow[i].uplow_ul.int_lower;
+        if(qlist_setPosSizeUpLow[i].uplow_ul.int_upper != -1)
+        {
+            int_upperCard = qlist_cardSuitsAndNumber[i+1].int_num;
+        }
+        if(qlist_setPosSizeUpLow[i].uplow_ul.int_lower != -1)
+        {
+            int_lowerCard = qlist_cardSuitsAndNumber[i-1].int_num;
+        }
         card_cardMake =
             new Card(this, qlist_cardSuitsAndNumber[i].qstring_suit, qlist_cardSuitsAndNumber[i].int_num,
-                     qlist_setPosAndsize[i].x(), qlist_setPosAndsize[i].y(), i);
-        card_cardMake->setGeometry(qlist_setPosAndsize[i]);
+                     qlist_setPosSizeUpLow[i].qrect_posSize.x(), qlist_setPosSizeUpLow[i].qrect_posSize.y(),
+                     int_initialZorder, int_upperCard, int_lowerCard);
+        card_cardMake->setGeometry(qlist_setPosSizeUpLow[i].qrect_posSize);
         card_cardMake->show();
         qlist_cards << (card_cardMake);
+        qDebug() << card_cardMake->qpointf_bePressedPos << " " << i  << " " <<card_cardMake->int_cardNumber << " " <<  card_cardMake->int_upperCardNum<< " " << card_cardMake->int_lowerCardNum;
     }
 
-    //int_maxZorder = 52;
-
-    //access 4 cards site's pos
-    qlist_cardSitePos = get_cardSitePos();
-    qlist_cardPlacedPos = get_cardSitePos();
+    //access 7 cards site's pos
+//    qlist_cardSitePos = get_PlayCardsPos();
+    qlist_cardPlacedPos = get_PlayCardsPos();
 }
 
 void Table::mousePressEvent(QMouseEvent *event)
 {
     //qDebug() << "table Press";
 
-    //check whether card is press
+    //check is any card be pressed
     CardBePressed_PressedCard.int_Zorder = -1;
     for(int i=0; i < qlist_cards.length(); i++)
     {
@@ -65,7 +86,7 @@ void Table::mousePressEvent(QMouseEvent *event)
         }
     }
 
-    //Zorder >=0 means card is br pressed, set card state
+    //Zorder >=0 means card is be pressed, set card state
     if(CardBePressed_PressedCard.int_Zorder >= 0 )
     {
         int i = CardBePressed_PressedCard.int_NumInCardList;
@@ -78,26 +99,29 @@ void Table::mousePressEvent(QMouseEvent *event)
         qlist_cards[i]->turnfront();
 
         //decide whether card is moveabel
-        if(qlist_cards[i]->pos() == QPointF(10,20))
+        if(qlist_cards[i]->pos() == qlist_StartCardsPos[0])
         {
             qlist_cards[i]->bool_moveabel = false;
-            qlist_cards[i]->move(130,20);
+            qlist_cards[i]->move(qlist_StartCardsPos[1].x(), qlist_StartCardsPos[1].y());
         }
     }
     //CardBePressed_PressedCard.int_Zorder == -1 means no cards is be pressed
     else if(CardBePressed_PressedCard.int_Zorder == -1)
     {
-        //if mouse press card start area (10,20)
-        if( check_mousePosOnArea(event->pos(), QPointF(10,20)) == true )
+        //if mouse press card start area (65,20)
+        if( check_mousePosOnArea(event->pos(), qlist_StartCardsPos[0]) == true )
         {
-            //put cards that on (130,20) back to (10,20)
+            //put cards that on (130,20) back to (65,20),
+            //and for keeping cards zorder, raise() cards int_Zorder
             for(int i=0; i < qlist_cards.length(); i++)
             {
-                if( qlist_cards[i]->pos() == QPointF(130,20))
+                if( qlist_cards[i]->pos() == qlist_StartCardsPos[1])
                 {
-                    qlist_cards[i]->move(10,20);
+                    int_maxZorder++;
+                    qlist_cards[i]->move(qlist_StartCardsPos[0].x(), qlist_StartCardsPos[0].y());
                     qlist_cards[i]->turnback();
-
+                    qlist_cards[i]->raise();
+                    qlist_cards[i]->int_Zorder = int_maxZorder;
                 }
             }
         }
@@ -109,6 +133,23 @@ void Table::mouseReleaseEvent(QMouseEvent *event)
 //    qDebug() << "table Release";
 
     //decide where cards can be placed
+
+    //update qlist_cardPlacedPos
+    qlist_cardPlacedPos = get_PlayCardsPos();
+    for(int i=0; i < qlist_cards.length(); i++)
+    {
+        for(int j=0; j < qlist_cardPlacedPos.length(); j++)
+        {
+            if( qlist_cards[i]->pos().x() == qlist_cardPlacedPos[j].x())
+            {
+                if( qlist_cards[i]->pos().y() >= qlist_cardPlacedPos[j].y())
+                {
+                    qlist_cardPlacedPos[j] = qlist_cards[i]->pos();
+                }
+            }
+        }
+    }
+
     //add check number
     for(int i=0; i < qlist_cards.length(); i++)
     {
@@ -170,47 +211,7 @@ void Table::mouseReleaseEvent(QMouseEvent *event)
         }
     }
 
-    //update qlist_cardPlacedPos
-    qlist_cardPlacedPos = get_cardSitePos();
-    for(int i=0; i < qlist_cards.length(); i++)
-    {
-        if(qlist_cards[i]->pos().x() == 10)
-        {
-            continue;
-        }
-        else if(qlist_cards[i]->pos().x() == 130)
-        {
-            continue;
-        }
-        else if(qlist_cards[i]->pos().x() == qlist_cardPlacedPos[0].x())
-        {
-            if(qlist_cards[i]->pos().y() > qlist_cardPlacedPos[0].y())
-            {
-                qlist_cardPlacedPos[0] = qlist_cards[i]->pos();
-            }
-        }
-        else if(qlist_cards[i]->pos().x() == qlist_cardPlacedPos[1].x())
-        {
-            if(qlist_cards[i]->pos().y() > qlist_cardPlacedPos[1].y())
-            {
-                qlist_cardPlacedPos[1] = qlist_cards[i]->pos();
-            }
-        }
-        else if(qlist_cards[i]->pos().x() == qlist_cardPlacedPos[2].x())
-        {
-            if(qlist_cards[i]->pos().y() > qlist_cardPlacedPos[2].y())
-            {
-                qlist_cardPlacedPos[2] = qlist_cards[i]->pos();
-            }
-        }
-        else if(qlist_cards[i]->pos().x() == qlist_cardPlacedPos[3].x())
-        {
-            if(qlist_cards[i]->pos().y() > qlist_cardPlacedPos[3].y())
-            {
-                qlist_cardPlacedPos[3] = qlist_cards[i]->pos();
-            }
-        }
-    }
+
 //    qDebug() << qlist_cardPlacedPos;
 
     //reset cards states

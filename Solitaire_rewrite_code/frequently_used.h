@@ -46,7 +46,13 @@ class PosSizeUpLow
         UpLow uplow_ul;
         QRect qrect_posSize;
         PosSizeUpLow(int x, int y, int w, int h, int up, int low);
-//        PosSizeUpLow setPosSizeUpLow(int x, int y, int w, int h, int up, int low);
+};
+
+class PosNum
+{
+    public:
+        QPointF qpointf_pos = QPointF(0,0);
+        int int_cardNum=0;
 };
 
 QString merge_filepath(QString x);
@@ -66,6 +72,8 @@ QList<PosSizeUpLow> get_CardsInitalPosSizeUpLow( QList<QPointF> qlist_startCardP
 QList<SuitAndNumber> get_cardsSuitsAndNumber();
 
 QList<QRect> get_cardSitePosAndSize( QList<QPointF> qlist_startCardPos, QList<QPointF> qlist_stackCardsPos, WidHei widhei_cardSize);
+
+QList<PosNum> get_PlaceCardPosAndNum( QList<QPointF> qlist_allCardPos, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_PlaceCardPos);
 
 #endif // FREQUENTLY_USED_H
 

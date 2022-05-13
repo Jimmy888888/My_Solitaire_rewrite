@@ -212,3 +212,53 @@ QList<QRect> get_cardSitePosAndSize( QList<QPointF> qlist_startCardPos, QList<QP
     }
     return qlist_posAndsize;
 }
+
+QList<PosNum> get_PlaceCardPosAndNum( QList<QPointF> qlist_allCardPos, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_PlaceCardPos)
+{
+    QList<PosNum> qlist_PlaceCardPosAndNum;
+    PosNum posnum_temp;
+    //intArray_PlaceCardNum recorder card order num that in qlist_cards for 7 PlaceCardPos in qlist_PlaceCardPos
+    int intArray_PlaceCardNum[7];
+    //initialize intArray_PlaceCardNum, -1 means no card
+    std::fill_n(intArray_PlaceCardNum, 7, -1);
+
+    for(int i=0; i < qlist_PlaceCardPos.length(); i++)
+    {
+        posnum_temp.int_cardNum = intArray_PlaceCardNum[i];
+        posnum_temp.qpointf_pos = qlist_PlaceCardPos[i];
+        qlist_PlaceCardPosAndNum << posnum_temp;
+    }
+    //record the uppermost card pos in every qlist_PlaceCardPos
+    bool bool_NoChosen;
+    for(int i=0; i < qlist_allCardPos.length(); i++)
+    {
+        bool_NoChosen = true;
+        //skip chosen cards that in qlist_MoveAbelCards[j]
+        //if qlist_MoveAbelCards.length()=0 this for loop wont run
+        for(int j=0; j < qlist_MoveAbelCards.length(); j++)
+        {
+            if(i == qlist_MoveAbelCards[j])
+            {
+                bool_NoChosen = false;
+            }
+        }
+        if( bool_NoChosen)
+        {
+            for(int k=0; k < qlist_PlaceCardPos.length(); k++)
+            {
+                if( qlist_allCardPos[i].x() == qlist_PlaceCardPos[k].x())
+                {
+                    if( qlist_allCardPos[i].y() >= qlist_PlaceCardPos[k].y())
+                    {
+                        //record the uppermost card pos for every qlist_PlaceCardPosAndNum[k].qpointf_pos
+                        qlist_PlaceCardPosAndNum[k].qpointf_pos = qlist_allCardPos[i];
+                        //also record card order num that in qlist_allCardPos
+                        qlist_PlaceCardPosAndNum[k].int_cardNum = i;
+                    }
+                }
+            }
+        }
+    }
+
+    return qlist_PlaceCardPosAndNum;
+}

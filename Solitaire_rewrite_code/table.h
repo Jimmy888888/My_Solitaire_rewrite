@@ -21,7 +21,10 @@ public:
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
-
+    CardBePressed get_thePressedCard(QList<Card *> qlist_cards, QMouseEvent *event);
+    QList<Card *> releaseOn_PlayCards(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards);
+//input:qlist_cards qlist_PlayCardPosAndNum, output:qlist_cards, change: move up low
+//for loop decide mouse release in playcards or stackcards or StartCard, than process_PlayCard process_StackCard process_StartCard
 
 private:
     QList<QPointF> qlist_StartCardsPos;
@@ -36,7 +39,6 @@ private:
     QList<Card *> qlist_cards;
     QPointF qpointf_movepos;
     QList<QPointF> qlist_cardMoveFixPos;
-    QList<PosNum> qlist_PlaceCardPosAndNum;
     CardBePressed CardBePressed_PressedCard;
     QList<int> qlist_MoveAbelCards;
     int int_maxZorder = 52;

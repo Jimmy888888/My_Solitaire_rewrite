@@ -213,22 +213,23 @@ QList<QRect> get_cardSitePosAndSize( QList<QPointF> qlist_startCardPos, QList<QP
     return qlist_posAndsize;
 }
 
-QList<PosNum> get_PlaceCardPosAndNum( QList<QPointF> qlist_allCardPos, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_PlaceCardPos)
+QList<PosNum> get_PlayCardPosAndNum( QList<QPointF> qlist_allCardPos, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_PlayCardPos)
 {
-    QList<PosNum> qlist_PlaceCardPosAndNum;
+    QList<PosNum> qlist_PlayCardPosAndNum;
     PosNum posnum_temp;
-    //intArray_PlaceCardNum recorder card order num that in qlist_cards for 7 PlaceCardPos in qlist_PlaceCardPos
+
+    //intArray_PlaceCardNum recorder card order num that in qlist_cards for 7 PlayCardPos in qlist_PlayCardPos
     int intArray_PlaceCardNum[7];
     //initialize intArray_PlaceCardNum, -1 means no card
     std::fill_n(intArray_PlaceCardNum, 7, -1);
-
-    for(int i=0; i < qlist_PlaceCardPos.length(); i++)
+    //initialize qlist_PlayCardPosAndNum
+    for(int i=0; i < qlist_PlayCardPos.length(); i++)
     {
         posnum_temp.int_cardNum = intArray_PlaceCardNum[i];
-        posnum_temp.qpointf_pos = qlist_PlaceCardPos[i];
-        qlist_PlaceCardPosAndNum << posnum_temp;
+        posnum_temp.qpointf_pos = qlist_PlayCardPos[i];
+        qlist_PlayCardPosAndNum << posnum_temp;
     }
-    //record the uppermost card pos in every qlist_PlaceCardPos
+    //record the uppermost card pos in 7 qlist_PlayCardPos
     bool bool_NoChosen;
     for(int i=0; i < qlist_allCardPos.length(); i++)
     {
@@ -244,21 +245,21 @@ QList<PosNum> get_PlaceCardPosAndNum( QList<QPointF> qlist_allCardPos, QList<int
         }
         if( bool_NoChosen)
         {
-            for(int k=0; k < qlist_PlaceCardPos.length(); k++)
+            for(int k=0; k < qlist_PlayCardPosAndNum.length(); k++)
             {
-                if( qlist_allCardPos[i].x() == qlist_PlaceCardPos[k].x())
+                if( qlist_allCardPos[i].x() == qlist_PlayCardPosAndNum[k].qpointf_pos.x())
                 {
-                    if( qlist_allCardPos[i].y() >= qlist_PlaceCardPos[k].y())
+                    if( qlist_allCardPos[i].y() >= qlist_PlayCardPosAndNum[k].qpointf_pos.y())
                     {
-                        //record the uppermost card pos for every qlist_PlaceCardPosAndNum[k].qpointf_pos
-                        qlist_PlaceCardPosAndNum[k].qpointf_pos = qlist_allCardPos[i];
+                        //record the uppermost card pos for every qlist_PlayCardPosAndNum[k].qpointf_pos
+                        qlist_PlayCardPosAndNum[k].qpointf_pos = qlist_allCardPos[i];
                         //also record card order num that in qlist_allCardPos
-                        qlist_PlaceCardPosAndNum[k].int_cardNum = i;
+                        qlist_PlayCardPosAndNum[k].int_cardNum = i;
                     }
                 }
             }
         }
     }
 
-    return qlist_PlaceCardPosAndNum;
+    return qlist_PlayCardPosAndNum;
 }

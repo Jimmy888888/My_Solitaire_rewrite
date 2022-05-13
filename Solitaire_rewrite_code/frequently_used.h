@@ -73,7 +73,7 @@ QList<SuitAndNumber> get_cardsSuitsAndNumber();
 
 QList<QRect> get_cardSitePosAndSize( QList<QPointF> qlist_startCardPos, QList<QPointF> qlist_stackCardsPos, WidHei widhei_cardSize);
 
-QList<PosNum> get_PlaceCardPosAndNum( QList<QPointF> qlist_allCardPos, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_PlaceCardPos);
+QList<PosNum> get_PlayCardPosAndNum( QList<QPointF> qlist_allCardPos, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_PlayCardPos);
 
 #endif // FREQUENTLY_USED_H
 

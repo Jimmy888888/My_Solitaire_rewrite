@@ -22,6 +22,7 @@ class CardBePressed
 {
     public:
         int int_Zorder = -1;
+        //card order number in qlist_cards
         int int_CardONum = -1;
 };
 

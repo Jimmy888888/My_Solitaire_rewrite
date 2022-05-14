@@ -64,43 +64,45 @@ void Table::mousePressEvent(QMouseEvent *event)
     //check is any card be pressed, if there is, record its card zorder and card order number in qlist_cards with CardBePressed
     CardBePressed_PressedCard = get_thePressedCard(qlist_cards, event);
 
-    //StackCardPos : up=-1 low=-1 zorder, check cardNum
-
+    //if press on StartCardsPos[0], need special treatment
     if(check_mousePosOnArea(event->pos(), qlist_StartCardsPos[0]) == true)
     {
-        //
+        if(CardBePressed_PressedCard.int_Zorder == -1)
+        {
+            //
+        }
+        else if(CardBePressed_PressedCard.int_Zorder >= 0)
+        {
+            //
+        }
     }
+    //all the other place has the same treatment
     else
     {
-        //
+        if(CardBePressed_PressedCard.int_Zorder == -1)
+        {
+            //do nothing
+        }
+        else if(CardBePressed_PressedCard.int_Zorder >= 0)
+        {
+            //input: CardBePressed_PressedCard qlist_cards; output: qlist_MoveAbelCards
+            //input: qlist_MoveAbelCards
+
+            //record moveabel cards
+            //qlist_MoveAbelCards = get_MoveAbelCard(qlist_cards, CardBePressed_PressedCard);
+        }
     }
 
     //CardBePressed_PressedCard.int_Zorder >=0 means card is be pressed, set card state
+
     if(CardBePressed_PressedCard.int_Zorder >= 0 )
     {
-        int int_numCardList = CardBePressed_PressedCard.int_NumInCardList;
-        int int_tempUpCardNum = int_numCardList;
-        //the pressed card and its upper cards will be record in qlist_MoveAbelCards, int_tempUpCardNum == -1 means no upper card
-        while(int_tempUpCardNum > -1)
-        {
-            qlist_MoveAbelCards << int_tempUpCardNum;
-            int_tempUpCardNum = qlist_cards[ int_tempUpCardNum ]->int_upperCardNum;
-        }
-        //if qlist_MoveAbelCards.length()=0 this for loop wont run
-        for(int i=0; i < qlist_MoveAbelCards.length(); i++)
-        {
-            //set card state
-            int_maxZorder++;
-            qlist_cards[ qlist_MoveAbelCards[i] ]->qpointf_bePressedPos = qlist_cards[ qlist_MoveAbelCards[i] ]->pos();
-            //qlist_cardMoveFixPos is used on void Table::mouseMoveEvent(QMouseEvent *event)
-            qlist_cardMoveFixPos << ( event->pos() - qlist_cards[ qlist_MoveAbelCards[i] ]->qpointf_bePressedPos );
-            qlist_cards[ qlist_MoveAbelCards[i] ]->bool_isPressed = true;
-            qlist_cards[ qlist_MoveAbelCards[i] ]->bool_moveabel = true;
-            qlist_cards[ qlist_MoveAbelCards[i] ]->bool_isFront = true;
-            qlist_cards[ qlist_MoveAbelCards[i] ]->int_Zorder = int_maxZorder;
-            qlist_cards[ qlist_MoveAbelCards[i] ]->raise();
-            qlist_cards[ qlist_MoveAbelCards[i] ]->turnfront();
-        }
+        //record moveabel cards
+        qlist_MoveAbelCards = get_MoveAbelCard(qlist_cards, CardBePressed_PressedCard);
+        //
+        qlist_cards = set_MoveAbelCardState(qlist_cards, qlist_MoveAbelCards, event);
+
+        int int_numCardList = CardBePressed_PressedCard.int_CardONum;
 
         //decide whether card is moveabel
         if(qlist_cards[int_numCardList]->pos() == qlist_StartCardsPos[0])
@@ -135,6 +137,8 @@ void Table::mousePressEvent(QMouseEvent *event)
 
 void Table::mouseReleaseEvent(QMouseEvent *event)
 {
+    //StackCardPos : up=-1 low=-1 zorder, check cardNum
+
     //make sure has card be pressed, and it can be moved
     if( qlist_MoveAbelCards.length() > 0  &&  qlist_cards[ qlist_MoveAbelCards[0] ]->bool_moveabel == true)
     {
@@ -144,7 +148,6 @@ void Table::mouseReleaseEvent(QMouseEvent *event)
 
     //reset cards states and qlist
     qlist_MoveAbelCards.clear();
-    qlist_cardMoveFixPos.clear();
     for(int i=0; i < qlist_cards.length(); i++)
     {
         if(qlist_cards[i]->bool_isPressed == true)
@@ -166,11 +169,13 @@ void Table::mouseMoveEvent(QMouseEvent *event)
     {
         if(qlist_cards[ qlist_MoveAbelCards[i] ]->bool_moveabel == true)
         {
-            qpointf_movepos = event->pos() - qlist_cardMoveFixPos[i];
+            qpointf_movepos = event->pos() - qlist_cards[ qlist_MoveAbelCards[i] ]->qpointf_MoveFixPos;
             qlist_cards[ qlist_MoveAbelCards[i] ]->move(qpointf_movepos.x(), qpointf_movepos.y());
         }
     }
 }
+
+
 
 //check is any card be pressed, if there is, record its card zorder and card order number in qlist_cards with CardBePressed
 CardBePressed Table:: get_thePressedCard(QList<Card *> qlist_cards, QMouseEvent *event)
@@ -190,17 +195,50 @@ CardBePressed Table:: get_thePressedCard(QList<Card *> qlist_cards, QMouseEvent 
                 if(qlist_cards[i]->int_upperCardNum == -1)
                 {
                     CardBePressed_temp.int_Zorder = qlist_cards[i]->int_Zorder;
-                    CardBePressed_temp.int_NumInCardList = i;
+                    CardBePressed_temp.int_CardONum = i;
                 }
                 else if(qlist_cards[i]->int_upperCardNum >= 0 && qlist_cards[i]->bool_isFront == true)
                 {
                     CardBePressed_temp.int_Zorder = qlist_cards[i]->int_Zorder;
-                    CardBePressed_temp.int_NumInCardList = i;
+                    CardBePressed_temp.int_CardONum = i;
                 }
             }
         }
     }
     return CardBePressed_temp;
+}
+
+QList<int> Table:: get_MoveAbelCard(QList<Card *> qlist_cards, CardBePressed CardBePressed_PressedCard)
+{
+    QList<int> qlist_MoveAbelCardsTemp;
+    int int_tempUpCardNum = CardBePressed_PressedCard.int_CardONum;
+    //the pressed card and its upper cards will be record in qlist_MoveAbelCards, int_tempUpCardNum == -1 means no upper card
+    while(int_tempUpCardNum > -1)
+    {
+        qlist_MoveAbelCardsTemp << int_tempUpCardNum;
+        int_tempUpCardNum = qlist_cards[ int_tempUpCardNum ]->int_upperCardNum;
+    }
+    return qlist_MoveAbelCardsTemp;
+}
+
+QList<Card *> Table:: set_MoveAbelCardState(QList<Card *> qlist_cards,  QList<int> qlist_MoveAbelCards, QMouseEvent *event)
+{
+    //if qlist_MoveAbelCards.length()=0 this for loop wont run
+    for(int i=0; i < qlist_MoveAbelCards.length(); i++)
+    {
+        //set card state
+        int_maxZorder++;
+        qlist_cards[ qlist_MoveAbelCards[i] ]->qpointf_bePressedPos = qlist_cards[ qlist_MoveAbelCards[i] ]->pos();
+        //qpointf_MoveFixPos is used on void Table::mouseMoveEvent(QMouseEvent *event)
+        qlist_cards[ qlist_MoveAbelCards[i] ]->qpointf_MoveFixPos = ( event->pos() - qlist_cards[ qlist_MoveAbelCards[i] ]->qpointf_bePressedPos );
+        qlist_cards[ qlist_MoveAbelCards[i] ]->bool_isPressed = true;
+        qlist_cards[ qlist_MoveAbelCards[i] ]->bool_moveabel = true;
+        qlist_cards[ qlist_MoveAbelCards[i] ]->bool_isFront = true;
+        qlist_cards[ qlist_MoveAbelCards[i] ]->int_Zorder = int_maxZorder;
+        qlist_cards[ qlist_MoveAbelCards[i] ]->raise();
+        qlist_cards[ qlist_MoveAbelCards[i] ]->turnfront();
+    }
+    return qlist_cards;
 }
 
 QList<Card *> Table:: releaseOn_PlayCards(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards)

@@ -26,6 +26,7 @@ public:
     int int_upperCardNum;
     int int_lowerCardNum;
     QPointF qpointf_bePressedPos;
+    QPointF qpointf_MoveFixPos;
     QPixmap qpixmap_cardFront;
     QPixmap qpixmap_cardBack;
 

@@ -7,6 +7,7 @@ Card::Card(QMainWindow *parent, QString card_suit, int int_cardNum, int int_init
     qpixmap_cardBack = QPixmap( merge_filepath( "pictures/card/red_back.png"));
     int_cardNumber = int_cardNum;
     qpointf_bePressedPos = QPointF(int_initalX, int_initalY);
+    qpointf_MoveFixPos = QPointF(0,0);
     int_Zorder = int_initalZ;
     int_upperCardNum = int_upper;
     int_lowerCardNum = int_lower;

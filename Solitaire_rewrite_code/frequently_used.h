@@ -21,8 +21,8 @@ class SuitAndNumber
 class CardBePressed
 {
     public:
-        int int_Zorder;
-        int int_NumInCardList;
+        int int_Zorder = -1;
+        int int_CardONum = -1;
 };
 
 class WidHei
@@ -53,6 +53,13 @@ class PosNum
     public:
         QPointF qpointf_pos = QPointF(0,0);
         int int_cardNum=0;
+};
+//card order num and move fix pos
+class ONumFixPos
+{
+    public:
+        QPointF qpointf_fixpos = QPointF(0,0);
+        int int_cardONum=0;
 };
 
 QString merge_filepath(QString x);

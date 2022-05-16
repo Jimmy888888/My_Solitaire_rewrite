@@ -26,8 +26,9 @@ public:
     QList<Card *> set_PutToStart1(QList<Card *> qlist_cards, CardBePressed CardBePressed_PressedCard, QList<QPointF> qlist_StartCardsPos, int int_maxZorder);
     QList<int> get_MoveAbelCard(QList<Card *> qlist_cards, CardBePressed CardBePressed_PressedCard);
     QList<Card *> set_MoveAbelCardState(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards, QMouseEvent *event, int int_maxZorder);
-    bool get_WetherOnStackPos(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards);
-    QList<Card *> releaseOn_PlayCards(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards);
+    int get_onWhichStackPos(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_StackCardsPos);
+    QList<Card *> releaseOn_StackCards(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_StackCardsPos, int int_onWhichStack);
+    QList<Card *> releaseOn_PlayCards(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_PlayCardsPos);
 //input:qlist_cards qlist_PlayCardPosAndNum, output:qlist_cards, change: move up low
 //for loop decide mouse release in playcards or stackcards or StartCard, than process_PlayCard process_StackCard process_StartCard
 

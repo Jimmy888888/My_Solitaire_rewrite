@@ -112,18 +112,18 @@ void Table::mouseReleaseEvent(QMouseEvent *event)
     //make sure has card be pressed, and it can be moved
     if( qlist_MoveAbelCards.length() > 0  &&  qlist_cards[ qlist_MoveAbelCards[0] ]->bool_moveabel == true)
     {
-        //check wether overlap on StackPos
-        bool bool_onStack = get_WetherOnStackPos(qlist_cards, qlist_MoveAbelCards, qlist_StackCardsPos);
-        //overlapping on StackPos
-        if(bool_onStack)
+        //check overlap on which StackPos, -1 means not on any StackPos
+        int int_onWhichStack = get_onWhichStackPos(qlist_cards, qlist_MoveAbelCards, qlist_StackCardsPos);
+        //overlapping on StackPos, move one card once
+        if(int_onWhichStack >= 0 && qlist_MoveAbelCards.length() == 1)
         {
-            //StackCardPos : up=-1 low=-1 zorder, check cardNum
+            qlist_cards = releaseOn_StackCards( qlist_cards, qlist_MoveAbelCards, qlist_StackCardsPos, int_onWhichStack);
         }
         //all the orther Pos
         else
         {
             //change card's pos, upper num, lower num according to PlayCards rule
-            qlist_cards = releaseOn_PlayCards(qlist_cards, qlist_MoveAbelCards);
+            qlist_cards = releaseOn_PlayCards(qlist_cards, qlist_MoveAbelCards, qlist_PlayCardsPos);
         }
     }
 
@@ -255,21 +255,88 @@ QList<Card *> Table:: set_MoveAbelCardState(QList<Card *> qlist_cards,  QList<in
     return qlist_cards;
 }
 
-bool Table:: get_WetherOnStackPos(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_StackCardsPos)
+int Table:: get_onWhichStackPos(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_StackCardsPos)
 {
-    //check wether overlap on StackPos
-    bool bool_onStack = false;
+    //check wether overlap on StackPos, -1 means no result
+    int int_onWhichStack = -1;
     for(int i=0; i < qlist_StackCardsPos.length(); i++)
     {
         if( decide_IsOverlapping( qlist_cards[ qlist_MoveAbelCards[0] ]->pos(), qlist_StackCardsPos[i]) == true)
         {
-            bool_onStack = true;
+            int_onWhichStack = i;
         }
     }
-    return bool_onStack;
+    return int_onWhichStack;
 }
 
-QList<Card *> Table:: releaseOn_PlayCards(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards)
+QList<Card *> Table:: releaseOn_StackCards(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_StackCardsPos, int int_onWhichStack)
+{
+    bool bool_canNotPlaced = true;
+    //check is there any card on StackCardsPos already
+    int int_AlreadyOnStack = -1;
+    for(int i=0; i < qlist_cards.length(); i++)
+    {
+        if( qlist_cards[i]->pos() == qlist_StackCardsPos[ int_onWhichStack ])
+        {
+            int_AlreadyOnStack = i;
+        }
+    }
+
+    if( int_AlreadyOnStack >= 0)
+    {
+        if( qlist_cards[ qlist_MoveAbelCards[0] ]->int_cardNumber -  qlist_cards[int_AlreadyOnStack]->int_cardNumber == 1 )
+        {
+            //make sure two cards has the same suit
+            if( qlist_cards[ qlist_MoveAbelCards[0] ]->int_cardNumber / 13 == qlist_cards[int_AlreadyOnStack]->int_cardNumber / 13 )
+            {
+                //set card that under qlist_cards[ qlist_MoveAbelCards[0] ] previously, int_upperCardNum = -1
+                if( qlist_cards[ qlist_MoveAbelCards[0] ]->int_lowerCardNum >= 0)
+                {
+                    qlist_cards[ qlist_cards[ qlist_MoveAbelCards[0] ]->int_lowerCardNum ]->int_upperCardNum = -1;
+                }
+                //move and raise card in qlist_MoveAbelCards
+                qlist_cards[ qlist_MoveAbelCards[0] ]->move(qlist_StackCardsPos[ int_onWhichStack ].x(), qlist_StackCardsPos[ int_onWhichStack ].y());
+                //once card level PlayCardPos, upper lower all set to -1
+                qlist_cards[ qlist_MoveAbelCards[0] ]->int_upperCardNum = -1;
+                qlist_cards[ qlist_MoveAbelCards[0] ]->int_lowerCardNum = -1;
+
+                bool_canNotPlaced = false;
+            }
+        }
+    }
+    else if( int_AlreadyOnStack == -1)
+    {
+        //qlist_MoveAbelCards[ qlist_MoveAbelCards.length()-1 ] % 13 ==0 means ace is the uppermost card in qlist_MoveAbelCards
+        if( qlist_cards[ qlist_MoveAbelCards[0] ]->int_cardNumber % 13 ==0 )
+        {
+            //set card that under qlist_cards[ qlist_MoveAbelCards[0] ] previously, int_upperCardNum = -1
+            if( qlist_cards[ qlist_MoveAbelCards[0] ]->int_lowerCardNum >= 0)
+            {
+                qlist_cards[ qlist_cards[ qlist_MoveAbelCards[0] ]->int_lowerCardNum ]->int_upperCardNum = -1;
+            }
+            //move and raise card in qlist_MoveAbelCards
+            qlist_cards[ qlist_MoveAbelCards[0] ]->move(qlist_StackCardsPos[ int_onWhichStack ].x(), qlist_StackCardsPos[ int_onWhichStack ].y());
+            //once card level PlayCardPos, upper lower all set to -1
+            qlist_cards[ qlist_MoveAbelCards[0] ]->int_upperCardNum = -1;
+            qlist_cards[ qlist_MoveAbelCards[0] ]->int_lowerCardNum = -1;
+
+            bool_canNotPlaced = false;
+        }
+    }
+
+    if(bool_canNotPlaced == true)
+    {
+        for(int i=0; i < qlist_MoveAbelCards.length(); i++)
+        {
+            int int_backX = qlist_cards[ qlist_MoveAbelCards[i] ]->qpointf_bePressedPos.x();
+            int int_backY = qlist_cards[ qlist_MoveAbelCards[i] ]->qpointf_bePressedPos.y();
+            qlist_cards[ qlist_MoveAbelCards[i] ]->move( int_backX, int_backY );
+        }
+    }
+    return qlist_cards;
+}
+
+QList<Card *> Table:: releaseOn_PlayCards(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_PlayCardsPos)
 {
     //get all card pos in qlist_cards
     QList<QPointF> qlist_allCardPos;
@@ -278,7 +345,7 @@ QList<Card *> Table:: releaseOn_PlayCards(QList<Card *> qlist_cards, QList<int> 
         qlist_allCardPos << QPointF(qlist_cards[i]->pos().x(), qlist_cards[i]->pos().y());
     }
     //get every uppermost card's Pos and order Num in qlist_cards for 7 PlayCardPos
-    QList<PosNum> qlist_PlayCardPosAndNum = get_PlayCardPosAndNum(qlist_allCardPos, qlist_MoveAbelCards, get_PlayCardsPos());
+    QList<PosNum> qlist_PlayCardPosAndNum = get_PlayCardPosAndNum(qlist_allCardPos, qlist_MoveAbelCards, qlist_PlayCardsPos);
 
     bool bool_canNotPlaced = true;
     //check if card is overlapping with 1 of any 7 PlayCardPos

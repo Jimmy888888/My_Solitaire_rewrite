@@ -69,16 +69,16 @@ void Table::mousePressEvent(QMouseEvent *event)
     {
         if(CardBePressed_PressedCard.int_Zorder == -1)
         {
-//            //put cards at qlist_StartCardsPos[1] back to qlist_StartCardsPos[0]
-//            qlist_cards = set_PutBackToStart0(qlist_cards, CardBePressed_PressedCard, qlist_StartCardsPos, int_maxZorder);
-//            //update maxZorder
-//            for(int i=0; i < qlist_cards.length(); i++)
-//            {
-//                if(qlist_cards[i]->pos() == qlist_StartCardsPos[0])
-//                {
-//                    int_maxZorder++;
-//                }
-//            }
+            //put cards at qlist_StartCardsPos[1] back to qlist_StartCardsPos[0]
+            qlist_cards = set_PutBackToStart0(qlist_cards, CardBePressed_PressedCard, qlist_StartCardsPos, int_maxZorder);
+            //update maxZorder
+            for(int i=0; i < qlist_cards.length(); i++)
+            {
+                if(qlist_cards[i]->pos() == qlist_StartCardsPos[0])
+                {
+                    int_maxZorder++;
+                }
+            }
         }
         else if(CardBePressed_PressedCard.int_Zorder >= 0)
         {
@@ -274,11 +274,17 @@ QList<Card *> Table:: releaseOn_StackCards(QList<Card *> qlist_cards, QList<int>
     bool bool_canNotPlaced = true;
     //check is there any card on StackCardsPos already
     int int_AlreadyOnStack = -1;
+    int int_tempZorder= -1;
     for(int i=0; i < qlist_cards.length(); i++)
     {
         if( qlist_cards[i]->pos() == qlist_StackCardsPos[ int_onWhichStack ])
         {
-            int_AlreadyOnStack = i;
+            //find the uppermost card
+            if( qlist_cards[i]->int_Zorder >= int_tempZorder)
+            {
+                int_AlreadyOnStack = i;
+                int_tempZorder = qlist_cards[i]->int_Zorder;
+            }
         }
     }
 
@@ -379,34 +385,42 @@ QList<Card *> Table:: releaseOn_PlayCards(QList<Card *> qlist_cards, QList<int> 
             //means there is card on qlist_PlayCardPos[j], and the card has been turn front
             else if( qlist_PlayCardPosAndNum[i].int_cardNum >= 0 && qlist_cards[ qlist_PlayCardPosAndNum[i].int_cardNum ]->bool_isFront == true)
             {
-                /*check whether card that on (qlist_PlayCardPos[j].x(), qlist_PlayCardPos[j].y() + 25)
+                /*check wether card that on (qlist_PlayCardPos[j].x(), qlist_PlayCardPos[j].y() + 25)
                 can match card that on (qlist_PlayCardPos[j].x(), qlist_PlayCardPos[j].y() ) */
+                //0 12    13 25    26 38    39 51
+                //0  1  0  14  0  27  0  40
+                //13 1  13 14  13 27  13 40
+                //result :
+                //if (qlist_cards[i]->int_cardNumber % 13) - (qlist_cards[k]->int_cardNumber % 13) == -1
+                //then qlist_cards[i] match qlist_cards[k]
                 if( (qlist_cards[ qlist_MoveAbelCards[0] ]->int_cardNumber % 13) - (qlist_cards[ qlist_PlayCardPosAndNum[i].int_cardNum ]->int_cardNumber % 13) == -1 )
                 {
-                    //0 12    13 25    26 38    39 51
-                    //0  1  0  14  0  27  0  40
-                    //13 1  13 14  13 27  13 40
-                    //result :
-                    //if (qlist_cards[i]->int_cardNumber % 13) - (qlist_cards[k]->int_cardNumber % 13) == -1
-                    //then qlist_cards[i] match qlist_cards[k]
-
-                    //if qlist_cards[ qlist_MoveAbelCards[0] ] has a lower card before
-                    if(qlist_cards[ qlist_MoveAbelCards[0] ]->int_lowerCardNum >= 0)
+                    //0~12 are club, 26~38 are spade, these are black cards
+                    //13~25 are diamond, 39~51 are heart , these are red cards
+                    //only red card can be put on black card, and only black card can be put on red card
+                    int int_InMove = (qlist_cards[ qlist_MoveAbelCards[0] ]->int_cardNumber / 13) % 2;
+                    int int_OnPlay = (qlist_cards[ qlist_PlayCardPosAndNum[i].int_cardNum ]->int_cardNumber / 13) % 2;
+                    //qAbs(int_InMove - int_OnPlay) == 1 means one card is red and another is black
+                    if( qAbs(int_InMove - int_OnPlay) == 1 )
                     {
-                        //qlist_cards[ qlist_MoveAbelCards[0] ] will move to new pos, so the the lower card has no upper card now
-                        qlist_cards[ qlist_cards[ qlist_MoveAbelCards[0] ]->int_lowerCardNum ]->int_upperCardNum = -1;
+                        //if qlist_cards[ qlist_MoveAbelCards[0] ] has a lower card before
+                        if(qlist_cards[ qlist_MoveAbelCards[0] ]->int_lowerCardNum >= 0)
+                        {
+                            //qlist_cards[ qlist_MoveAbelCards[0] ] will move to new pos, so the the lower card has no upper card now
+                            qlist_cards[ qlist_cards[ qlist_MoveAbelCards[0] ]->int_lowerCardNum ]->int_upperCardNum = -1;
+                        }
+                        //qlist_cards[ qlist_MoveAbelCards[0] ] has new lower card qlist_cards[ qlist_PlayCardPosAndNum[i].int_cardNum ]
+                        qlist_cards[ qlist_MoveAbelCards[0] ]->int_lowerCardNum = qlist_PlayCardPosAndNum[i].int_cardNum;
+                        qlist_cards[ qlist_PlayCardPosAndNum[i].int_cardNum ]->int_upperCardNum = qlist_MoveAbelCards[0];
+                        //move cards to new pos qlist_PlayCardPos[i]
+                        for(int j = 0; j < qlist_MoveAbelCards.length(); j++)
+                        {
+                            qlist_cards[ qlist_MoveAbelCards[j] ]->move( qlist_PlayCardPosAndNum[i].qpointf_pos.x(), qlist_PlayCardPosAndNum[i].qpointf_pos.y() +25);
+                            qlist_PlayCardPosAndNum[i].qpointf_pos = QPointF(qlist_PlayCardPosAndNum[i].qpointf_pos.x(), qlist_PlayCardPosAndNum[i].qpointf_pos.y() +25);
+                        }
+                        bool_canNotPlaced = false;
+                        break;
                     }
-                    //qlist_cards[ qlist_MoveAbelCards[0] ] has new lower card qlist_cards[ qlist_PlayCardPosAndNum[i].int_cardNum ]
-                    qlist_cards[ qlist_MoveAbelCards[0] ]->int_lowerCardNum = qlist_PlayCardPosAndNum[i].int_cardNum;
-                    qlist_cards[ qlist_PlayCardPosAndNum[i].int_cardNum ]->int_upperCardNum = qlist_MoveAbelCards[0];
-                    //move cards to new pos qlist_PlayCardPos[i]
-                    for(int j = 0; j < qlist_MoveAbelCards.length(); j++)
-                    {
-                        qlist_cards[ qlist_MoveAbelCards[j] ]->move( qlist_PlayCardPosAndNum[i].qpointf_pos.x(), qlist_PlayCardPosAndNum[i].qpointf_pos.y() +25);
-                        qlist_PlayCardPosAndNum[i].qpointf_pos = QPointF(qlist_PlayCardPosAndNum[i].qpointf_pos.x(), qlist_PlayCardPosAndNum[i].qpointf_pos.y() +25);
-                    }
-                    bool_canNotPlaced = false;
-                    break;
                 }
             }
         }

@@ -213,6 +213,7 @@ QList<Card *> Table:: set_PutToStart1(QList<Card *> qlist_cards, CardBePressed C
     //if card is at qlist_StartCardsPos[0]
     if(qlist_cards[ CardBePressed_PressedCard.int_CardONum ]->pos() == qlist_StartCardsPos[0])
     {
+        int_maxZorder++;
         qlist_cards[ CardBePressed_PressedCard.int_CardONum ]->bool_moveabel = false;
         qlist_cards[ CardBePressed_PressedCard.int_CardONum ]->turnfront();
         qlist_cards[CardBePressed_PressedCard.int_CardONum]->int_Zorder = int_maxZorder;
@@ -362,7 +363,7 @@ QList<Card *> Table:: releaseOn_PlayCards(QList<Card *> qlist_cards, QList<int> 
             //means no card on qlist_PlayCardPosAndNum[i].qpointf_pos
             if(qlist_PlayCardPosAndNum[i].int_cardNum == -1)
             {
-                if(true)// qlist_cards[ qlist_MoveAbelCards[0] ]->int_cardNumber % 13 == 12
+                if(qlist_cards[ qlist_MoveAbelCards[0] ]->int_cardNumber % 13 == 12)// only k can be placed
                 {
                     //if qlist_cards[ qlist_MoveAbelCards[0] ] has a lower card before
                     if( qlist_cards[ qlist_MoveAbelCards[0] ]->int_lowerCardNum >= 0)

@@ -22,7 +22,7 @@ PosSizeUpLow::PosSizeUpLow(int x, int y, int w, int h, int up, int low)
 
 QString merge_filepath(QString x)
 {
-    QString y = "C:/Users/88696/Desktop/Git_for_interview/Solitaire_rewrite/Solitaire_rewrite_code/";
+    QString y = "C:/Users/renre/Desktop/Git_for_interview/Solitaire_rewrite/Solitaire_rewrite_code/";
     QString z;
     z = y + x;
     return z;
@@ -165,7 +165,8 @@ QList<SuitAndNumber> get_cardsSuitsAndNumber()
     QList<SuitAndNumber> qlist_cardsSuitsAndNumber;
     SuitAndNumber SuitAndNumber_temp;
     int int_num = 0, int_random = 0;
-    ifstream fileread("C:/Users/88696/Desktop/Git_for_interview/Solitaire_rewrite/Solitaire_rewrite_code/pictures/card_suits.txt");
+    string cardsListPath = merge_filepath("pictures/card_suits.txt").toStdString();//QString to string
+    ifstream fileread( cardsListPath );
 
     if(fileread)
     {

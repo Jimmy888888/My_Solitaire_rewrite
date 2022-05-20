@@ -1,5 +1,0 @@
-C:/Users/renre/Desktop/Git_for_interview/Solitaire_rewrite/build-Solitaire_rewrite_code-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/CMakeFiles/Solitaire_rewrite_code.dir
-C:/Users/renre/Desktop/Git_for_interview/Solitaire_rewrite/build-Solitaire_rewrite_code-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
-C:/Users/renre/Desktop/Git_for_interview/Solitaire_rewrite/build-Solitaire_rewrite_code-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
-C:/Users/renre/Desktop/Git_for_interview/Solitaire_rewrite/build-Solitaire_rewrite_code-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/CMakeFiles/Solitaire_rewrite_code_autogen_timestamp_deps.dir
-C:/Users/renre/Desktop/Git_for_interview/Solitaire_rewrite/build-Solitaire_rewrite_code-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/CMakeFiles/Solitaire_rewrite_code_autogen.dir

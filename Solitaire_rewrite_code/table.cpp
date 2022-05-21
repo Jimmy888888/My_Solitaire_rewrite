@@ -19,13 +19,14 @@ Table::Table(QWidget *parent)
 
     //access card site's pos and size, and make 6 card sites on table, and save card sites in qlabel_cardSite
     qlist_setCardSitePosAndsize = get_cardSitePosAndSize(qlist_StartCardsPos, qlist_StackCardsPos, widhei_cardSize);
-    QPixmap qpixmap_cardSite(merge_filepath("pictures/card_site.png"));
+    QPixmap qpixmap_cardSite(merge_filepath("pictures/card_empty.png"));
     for(int i=0; i < qlist_setCardSitePosAndsize.length(); i++)
     {
         qlabel_cardSite = new QLabel(this);
         qlabel_cardSite->setGeometry(qlist_setCardSitePosAndsize[i]);
         qlabel_cardSite->setPixmap(qpixmap_cardSite);
         qlist_cardSite << qlabel_cardSite;
+        qpixmap_cardSite = QPixmap(merge_filepath("pictures/card_site.png"));
     }
 
 
@@ -273,9 +274,9 @@ int Table:: get_onWhichStackPos(QList<Card *> qlist_cards, QList<int> qlist_Move
 QList<Card *> Table:: releaseOn_StackCards(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_StackCardsPos, int int_onWhichStack)
 {
     bool bool_canNotPlaced = true;
-    //check is there any card on StackCardsPos already
     int int_AlreadyOnStack = -1;
     int int_tempZorder= -1;
+    //check is there any card on StackCardsPos already
     for(int i=0; i < qlist_cards.length(); i++)
     {
         if( qlist_cards[i]->pos() == qlist_StackCardsPos[ int_onWhichStack ])

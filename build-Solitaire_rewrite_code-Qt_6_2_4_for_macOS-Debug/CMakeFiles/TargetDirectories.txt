@@ -1,0 +1,5 @@
+/Users/kangrenjun/My_Solitaire_rewrite/build-Solitaire_rewrite_code-Qt_6_2_4_for_macOS-Debug/CMakeFiles/rebuild_cache.dir
+/Users/kangrenjun/My_Solitaire_rewrite/build-Solitaire_rewrite_code-Qt_6_2_4_for_macOS-Debug/CMakeFiles/edit_cache.dir
+/Users/kangrenjun/My_Solitaire_rewrite/build-Solitaire_rewrite_code-Qt_6_2_4_for_macOS-Debug/CMakeFiles/Solitaire_rewrite_code.dir
+/Users/kangrenjun/My_Solitaire_rewrite/build-Solitaire_rewrite_code-Qt_6_2_4_for_macOS-Debug/CMakeFiles/Solitaire_rewrite_code_autogen_timestamp_deps.dir
+/Users/kangrenjun/My_Solitaire_rewrite/build-Solitaire_rewrite_code-Qt_6_2_4_for_macOS-Debug/CMakeFiles/Solitaire_rewrite_code_autogen.dir

@@ -22,7 +22,7 @@ PosSizeUpLow::PosSizeUpLow(int x, int y, int w, int h, int up, int low)
 
 QString merge_filepath(QString x)
 {
-    QString y = "C:/Users/renre/Desktop/Git_for_interview/Solitaire_rewrite/Solitaire_rewrite_code/";
+    QString y = "/Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/";
     QString z;
     z = y + x;
     return z;

@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     // Create the button, make "this" the parent
     qbutton_Start = new QPushButton(this);
     qbutton_Start->setGeometry(100,600,200,50);
+    qbutton_Start->setStyleSheet("QPushButton {background: 'black';}");
     qbutton_Start->setText("START");
     // Connect button signal to appropriate slot
     connect(qbutton_Start, &QPushButton::released, this, &MainWindow::clicked_startButton);

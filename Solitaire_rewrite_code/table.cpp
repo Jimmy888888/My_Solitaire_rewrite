@@ -5,9 +5,17 @@ Table::Table(QWidget *parent)
 {
     this->setWindowTitle("Game Start");
     this->setWindowIcon( QIcon( merge_filepath("pictures/icon.png")));
-    this->setMinimumSize(1200,900);
-    this->setMaximumSize(1200,900);
+    this->setMinimumSize(1200,800);
+    this->setMaximumSize(1200,800);
     this->setStyleSheet("QMainWindow {background: 'green';}");
+
+    //Botton for count score
+    qpushbotton_score = new QPushButton(this);
+    qpushbotton_score->setGeometry(20,720,150,60);
+    qpushbotton_score->setText("Count Score");
+    qpushbotton_score->setStyleSheet("QPushButton {font-size: 20pt;}");
+    //Connect button signal to appropriate slot
+    connect(qpushbotton_score, &QPushButton::clicked, this, &Table::clicked_startButton);
 
     //access three kinds cards pos
     qlist_StartCardsPos = get_StartCardsPos();
@@ -437,4 +445,54 @@ QList<Card *> Table:: releaseOn_PlayCards(QList<Card *> qlist_cards, QList<int> 
         }
     }
     return qlist_cards;
+}
+
+void Table::clicked_startButton()
+{
+    //count Club, Diamond, Spade, Heart, and total cards
+    int int_Club = 0;
+    int int_Diamond = 0;
+    int int_Spade = 0;
+    int int_Heart = 0;
+    int int_TotalScore = 0;
+    //check all cards
+    for(int i=0; i < qlist_cards.length(); i++)
+    {
+        //cards in StackArea
+        bool bool_inStack = false;
+        for(int j=0; j < qlist_StackCardsPos.length(); j++)
+        {
+            if( qlist_cards[i]->pos() == qlist_StackCardsPos[j])
+            {
+                bool_inStack = true;
+            }
+        }
+        //count four suits cards
+        if(bool_inStack == true)
+        {
+            int int_grouping = qlist_cards[i]->int_cardNumber / 13;
+            if( int_grouping == 0)
+            {
+                int_Club++;
+            }
+            else if( int_grouping == 1)
+            {
+                int_Diamond++;
+            }
+            else if( int_grouping == 2)
+            {
+                int_Spade++;
+            }
+            else if( int_grouping == 3)
+            {
+                int_Heart++;
+            }
+        }
+
+    }
+    //four suits cards add togather
+    int_TotalScore = int_Club + int_Diamond + int_Spade + int_Heart;
+
+    scoreboard_score = new Scoreboard(int_Club, int_Diamond, int_Spade, int_Heart, int_TotalScore);
+    scoreboard_score->show();
 }

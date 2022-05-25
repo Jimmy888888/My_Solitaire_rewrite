@@ -372,6 +372,7 @@
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include/stdarg.h \
   /Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/card.h \
   /Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/frequently_used.h \
+  /Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/scoreboard.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/QList \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/QObject \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/QPointF \

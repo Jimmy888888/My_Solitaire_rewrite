@@ -45,6 +45,7 @@ set(OLD_GLOB
   "/Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/frequently_used.cpp"
   "/Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/main.cpp"
   "/Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/mainwindow.cpp"
+  "/Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/scoreboard.cpp"
   "/Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/table.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
@@ -67,6 +68,7 @@ set(OLD_GLOB
   "/Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/card.h"
   "/Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/frequently_used.h"
   "/Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/mainwindow.h"
+  "/Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/scoreboard.h"
   "/Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/table.h"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

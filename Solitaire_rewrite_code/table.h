@@ -12,6 +12,7 @@
 
 #include "frequently_used.h"
 #include "card.h"
+#include "scoreboard.h"
 
 class Table : public QMainWindow
 {
@@ -47,6 +48,12 @@ private:
     CardBePressed CardBePressed_PressedCard;
     QList<int> qlist_MoveAbelCards;
     int int_maxZorder = 52;
+    int int_score = 0;
+    QPushButton *qpushbotton_score;
+    Scoreboard *scoreboard_score;
+
+private slots:
+    void clicked_startButton();
 
 };
 

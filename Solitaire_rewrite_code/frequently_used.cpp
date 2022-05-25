@@ -88,25 +88,25 @@ QList<QPointF> get_PlayCardsPos()
 {
     QList<QPointF> qlist_PlayCardsPos;
 
-    QPointF qpointf_posOne(65,220);
+    QPointF qpointf_posOne(65,200);
     qlist_PlayCardsPos << qpointf_posOne;
 
-    QPointF qpointf_posTwo(225,220);
+    QPointF qpointf_posTwo(225,200);
     qlist_PlayCardsPos << qpointf_posTwo;
 
-    QPointF qpointf_posThree(385,220);
+    QPointF qpointf_posThree(385,200);
     qlist_PlayCardsPos << qpointf_posThree;
 
-    QPointF qpointf_posFour(545,220);
+    QPointF qpointf_posFour(545,200);
     qlist_PlayCardsPos << qpointf_posFour;
 
-    QPointF qpointf_posFive(705,220);
+    QPointF qpointf_posFive(705,200);
     qlist_PlayCardsPos << qpointf_posFive;
 
-    QPointF qpointf_posSix(865,220);
+    QPointF qpointf_posSix(865,200);
     qlist_PlayCardsPos << qpointf_posSix;
 
-    QPointF qpointf_posSeven(1025,220);
+    QPointF qpointf_posSeven(1025,200);
     qlist_PlayCardsPos << qpointf_posSeven;
 
     return qlist_PlayCardsPos;

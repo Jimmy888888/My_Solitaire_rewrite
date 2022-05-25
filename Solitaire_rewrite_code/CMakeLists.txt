@@ -26,6 +26,8 @@ set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
         mainwindow.h
+        scoreboard.cpp
+        scoreboard.h
         mainwindow.ui
         ${TS_FILES}
 )

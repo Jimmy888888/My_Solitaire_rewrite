@@ -9,8 +9,8 @@ Card::Card(QMainWindow *parent, QString card_suit, int int_cardNum, int int_init
     qpointf_bePressedPos = QPointF(int_initalX, int_initalY);
     qpointf_MoveFixPos = QPointF(0,0);
     int_Zorder = int_initalZ;
-    int_upperCardNum = int_upper;
-    int_lowerCardNum = int_lower;
+    int_upperCardONum = int_upper;
+    int_lowerCardONum  = int_lower;
     this->setPixmap(qpixmap_cardBack);
 }
 

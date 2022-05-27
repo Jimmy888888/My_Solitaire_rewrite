@@ -53,13 +53,15 @@ class PosNum
 {
     public:
         QPointF qpointf_pos = QPointF(0,0);
-        int int_cardNum=0;
+        //card order number in qlist_cards
+        int int_cardONum=0;
 };
 //card order num and move fix pos
 class ONumFixPos
 {
     public:
         QPointF qpointf_fixpos = QPointF(0,0);
+        //card order number in qlist_cards
         int int_cardONum=0;
 };
 

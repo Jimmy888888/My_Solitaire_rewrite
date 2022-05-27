@@ -30,8 +30,6 @@ public:
     int get_onWhichStackPos(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_StackCardsPos);
     QList<Card *> releaseOn_StackCards(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_StackCardsPos, int int_onWhichStack);
     QList<Card *> releaseOn_PlayCards(QList<Card *> qlist_cards, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_PlayCardsPos);
-//input:qlist_cards qlist_PlayCardPosAndNum, output:qlist_cards, change: move up low
-//for loop decide mouse release in playcards or stackcards or StartCard, than process_PlayCard process_StackCard process_StartCard
 
 private:
     QList<QPointF> qlist_StartCardsPos;

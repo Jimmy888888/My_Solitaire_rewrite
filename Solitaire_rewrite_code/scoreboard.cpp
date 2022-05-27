@@ -9,6 +9,8 @@ Scoreboard::Scoreboard(int int_Club, int int_Diamond, int int_Spade, int int_Hea
     //opacity 0~1
     this->setWindowOpacity(0.95);
 
+    //display score
+    //show how many club
     QPixmap qpixmap_Club(merge_filepath("pictures/club.png"));
     QLabel *qlabel_LogoClub = new QLabel(this);
     qlabel_LogoClub->setPixmap(qpixmap_Club);
@@ -19,7 +21,7 @@ Scoreboard::Scoreboard(int int_Club, int int_Diamond, int int_Spade, int int_Hea
     qlabel_Club->setGeometry(50,10,300,20);
     qlabel_Club->setText(qstring_Club);
     qlabel_Club->setStyleSheet("QLabel { font-size: 20pt; color:black;}");
-
+    //show how many diamond
     QPixmap qpixmap_Diamond(merge_filepath("pictures/diamond.png"));
     QLabel *qlabel_LogoDiamond = new QLabel(this);
     qlabel_LogoDiamond->setPixmap(qpixmap_Diamond);
@@ -30,7 +32,7 @@ Scoreboard::Scoreboard(int int_Club, int int_Diamond, int int_Spade, int int_Hea
     qlabel_Diamond->setGeometry(50,44,300,20);
     qlabel_Diamond->setText(qstring_Diamond);
     qlabel_Diamond->setStyleSheet("QLabel { font-size: 20pt; color:red;}");
-
+    //show how many spade
     QPixmap qpixmap_Spade(merge_filepath("pictures/spade.png"));
     QLabel *qlabel_LogoSpade = new QLabel(this);
     qlabel_LogoSpade->setPixmap(qpixmap_Spade);
@@ -41,7 +43,7 @@ Scoreboard::Scoreboard(int int_Club, int int_Diamond, int int_Spade, int int_Hea
     qlabel_Spade->setGeometry(50,78,300,20);
     qlabel_Spade->setText(qstring_Spade);
     qlabel_Spade->setStyleSheet("QLabel { font-size: 20pt; color:black;}");
-
+    //show how many heart
     QPixmap qpixmap_Heart(merge_filepath("pictures/heart.png"));
     QLabel *qlabel_LogoHeart = new QLabel(this);
     qlabel_LogoHeart->setPixmap(qpixmap_Heart);
@@ -52,7 +54,7 @@ Scoreboard::Scoreboard(int int_Club, int int_Diamond, int int_Spade, int int_Hea
     qlabel_Heart->setGeometry(50,112,300,20);
     qlabel_Heart->setText(qstring_Heart);
     qlabel_Heart->setStyleSheet("QLabel { font-size: 20pt; color:red;}");
-
+    //show how many total score
     QString qstring_TotalScore = "Total Score: ";
     qstring_TotalScore = qstring_TotalScore + QString::number(int_TotalScore);
     qlabel_TotalScore = new QLabel(this);

@@ -23,8 +23,8 @@ public:
     bool bool_moveabel = false;
     int int_cardNumber;
     int int_Zorder;
-    int int_upperCardNum;
-    int int_lowerCardNum;
+    int int_upperCardONum;
+    int int_lowerCardONum;
     QPointF qpointf_bePressedPos;
     QPointF qpointf_MoveFixPos;
     QPixmap qpixmap_cardFront;

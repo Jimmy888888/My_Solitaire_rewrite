@@ -164,7 +164,7 @@ QList<SuitAndNumber> get_cardsSuitsAndNumber()
 {
     QList<SuitAndNumber> qlist_cardsSuitsAndNumber;
     SuitAndNumber SuitAndNumber_temp;
-    int int_num = 0, int_random = 0;
+    int int_cardNum = 0, int_random = 0;
     string cardsListPath = merge_filepath("pictures/card_suits.txt").toStdString();//QString to string
     ifstream fileread( cardsListPath );
 
@@ -174,15 +174,15 @@ QList<SuitAndNumber> get_cardsSuitsAndNumber()
         {
             //QString::fromStdString(string_readline) convert string to QString
             SuitAndNumber_temp.qstring_suit = QString::fromStdString(string_readline);
-            SuitAndNumber_temp.int_num = int_num;
+            SuitAndNumber_temp.int_num = int_cardNum;
             qlist_cardsSuitsAndNumber << (SuitAndNumber_temp);
-            int_num++;
+            int_cardNum++;
         }
 
         //randomly reorder 52 cards
         for(int i=0; i < qlist_cardsSuitsAndNumber.length(); i++)
         {
-            int_random= rand()%52;
+            int_random= arc4random()%52;
             SuitAndNumber_temp = qlist_cardsSuitsAndNumber[i];
             qlist_cardsSuitsAndNumber[i] = qlist_cardsSuitsAndNumber[int_random];
             qlist_cardsSuitsAndNumber[int_random] = SuitAndNumber_temp;
@@ -226,7 +226,7 @@ QList<PosNum> get_PlayCardPosAndNum( QList<QPointF> qlist_allCardPos, QList<int>
     //initialize qlist_PlayCardPosAndNum
     for(int i=0; i < qlist_PlayCardPos.length(); i++)
     {
-        posnum_temp.int_cardNum = intArray_PlaceCardNum[i];
+        posnum_temp.int_cardONum = intArray_PlaceCardNum[i];
         posnum_temp.qpointf_pos = qlist_PlayCardPos[i];
         qlist_PlayCardPosAndNum << posnum_temp;
     }
@@ -255,7 +255,7 @@ QList<PosNum> get_PlayCardPosAndNum( QList<QPointF> qlist_allCardPos, QList<int>
                         //record the uppermost card pos for every qlist_PlayCardPosAndNum[k].qpointf_pos
                         qlist_PlayCardPosAndNum[k].qpointf_pos = qlist_allCardPos[i];
                         //also record card order num that in qlist_allCardPos
-                        qlist_PlayCardPosAndNum[k].int_cardNum = i;
+                        qlist_PlayCardPosAndNum[k].int_cardONum = i;
                     }
                 }
             }

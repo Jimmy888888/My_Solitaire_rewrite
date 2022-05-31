@@ -33,8 +33,3 @@ public:
 };
 
 #endif // CARD_H
-
-
-//card status:back front
-//zvalue
-//place

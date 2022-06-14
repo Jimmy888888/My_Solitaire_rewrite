@@ -2,7 +2,8 @@
 ## Description
 
 I done this college independent study when I’m freshman. It’s a Qt c++ program for solitaire poker game.</br>
-Here is a timer in this program and it will tall you how many time you take for finish a game.
+I rewirte it on 2022 May. I try to make my code more readable, and make README. 
+Hoping I can make my code easy to understand.
 
 ## Software Architecture graph
 <div align=center><img src="./Readme_graph/classes.jpg" with=630 height=700/></div>

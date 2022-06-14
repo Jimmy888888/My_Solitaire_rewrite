@@ -62,3 +62,8 @@ Scoreboard::Scoreboard(int int_Club, int int_Diamond, int int_Spade, int int_Hea
     qlabel_TotalScore->setText(qstring_TotalScore);
     qlabel_TotalScore->setStyleSheet("QLabel { font-size: 35pt; color:grey;}");
 }
+
+void Scoreboard::closeEvent (QCloseEvent *event)
+{
+    emit close_scoreboard();
+}

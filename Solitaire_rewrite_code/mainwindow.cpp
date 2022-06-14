@@ -32,11 +32,8 @@ MainWindow::MainWindow(QWidget *parent)
     qbutton_Start->setGeometry(100,600,200,50);
     qbutton_Start->setStyleSheet("QPushButton { font-size: 18pt; background: 'black';}");
     qbutton_Start->setText("START");
-    // Connect button signal to appropriate slot
+    // Connect button signal to clicked_startButton slot
     connect(qbutton_Start, &QPushButton::clicked, this, &MainWindow::clicked_startButton);
-
-
-
 
 }
 
@@ -47,7 +44,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::clicked_startButton()
 {
-  table_CardTable = new Table();
-  table_CardTable->show();
+    table_CardTable = new Table();
+    table_CardTable->show();
+    this->setEnabled(false);
+    // Connect table_CardTable signal colse to this slit tbleClose
+    connect(table_CardTable, &Table::close_table, this, &MainWindow::tableClose);
 }
 
+void MainWindow::tableClose()
+{
+    this->setEnabled(true);
+}

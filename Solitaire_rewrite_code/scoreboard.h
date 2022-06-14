@@ -2,6 +2,7 @@
 #include <QLabel>
 #include <QWidget>
 #include <QPixmap>
+#include <QCloseEvent>
 
 #ifndef SCOREBOARD_H
 #define SCOREBOARD_H
@@ -17,6 +18,11 @@ public:
     QLabel *qlabel_Spade;
     QLabel *qlabel_Heart;
     QLabel *qlabel_TotalScore;
+    //Do something after Scoreboard closed
+    void closeEvent (QCloseEvent *event);
+
+signals:
+    void close_scoreboard();
 
 };
 

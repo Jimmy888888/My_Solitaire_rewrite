@@ -14,12 +14,6 @@ PosSizeUpLow::PosSizeUpLow(int x, int y, int w, int h, int up, int low)
     uplow_ul.int_lower = low;
 }
 
-//PosSizeUpLow setPosSizeUpLow(int x, int y, int w, int h, int up, int low)
-//{
-//    PosSizeUpLow posSizeUpLow_set( x, y, w, h, up, low);
-//    return posSizeUpLow_set;
-//}
-
 QString merge_filepath(QString x)
 {
     QString y = "/Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/";
@@ -52,85 +46,86 @@ bool check_mousePosOnArea(QPointF qpointf_mousePos, QPointF qpointf_areaPos)
     return bool_on;
 }
 
-QList<QPointF> get_StartCardsPos()
+QList<QPointF> get_StartCardsArea ()
 {
-    QList<QPointF> qlist_StartCardPos;
+    QList<QPointF> qlist_StartCardsArea;
 
     QPointF qpointf_posOne(65,20);
-    qlist_StartCardPos << qpointf_posOne;
+    qlist_StartCardsArea << qpointf_posOne;
 
     QPointF qpointf_posTwo(225,20);
-    qlist_StartCardPos << qpointf_posTwo;
+    qlist_StartCardsArea << qpointf_posTwo;
 
-    return qlist_StartCardPos;
+    return qlist_StartCardsArea;
 }
 
-QList<QPointF> get_StackCardsPos()
+QList<QPointF> get_StackCardsArea ()
 {
-    QList<QPointF> qlist_StackCardsPos;
+    QList<QPointF> qlist_StackCardsArea;
 
     QPointF qpointf_posOne(545,20);
-    qlist_StackCardsPos << qpointf_posOne;
+    qlist_StackCardsArea << qpointf_posOne;
 
     QPointF qpointf_posTwo(705,20);
-    qlist_StackCardsPos << qpointf_posTwo;
+    qlist_StackCardsArea << qpointf_posTwo;
 
     QPointF qpointf_posThree(865,20);
-    qlist_StackCardsPos << qpointf_posThree;
+    qlist_StackCardsArea << qpointf_posThree;
 
     QPointF qpointf_posFour(1025,20);
-    qlist_StackCardsPos << qpointf_posFour;
+    qlist_StackCardsArea << qpointf_posFour;
 
-    return qlist_StackCardsPos;
+    return qlist_StackCardsArea;
 }
 
-QList<QPointF> get_PlayCardsPos()
+QList<QPointF> get_PlayCardsArea ()
 {
-    QList<QPointF> qlist_PlayCardsPos;
+    QList<QPointF> qlist_PlayCardsArea;
 
     QPointF qpointf_posOne(65,200);
-    qlist_PlayCardsPos << qpointf_posOne;
+    qlist_PlayCardsArea << qpointf_posOne;
 
     QPointF qpointf_posTwo(225,200);
-    qlist_PlayCardsPos << qpointf_posTwo;
+    qlist_PlayCardsArea << qpointf_posTwo;
 
     QPointF qpointf_posThree(385,200);
-    qlist_PlayCardsPos << qpointf_posThree;
+    qlist_PlayCardsArea << qpointf_posThree;
 
     QPointF qpointf_posFour(545,200);
-    qlist_PlayCardsPos << qpointf_posFour;
+    qlist_PlayCardsArea << qpointf_posFour;
 
     QPointF qpointf_posFive(705,200);
-    qlist_PlayCardsPos << qpointf_posFive;
+    qlist_PlayCardsArea << qpointf_posFive;
 
     QPointF qpointf_posSix(865,200);
-    qlist_PlayCardsPos << qpointf_posSix;
+    qlist_PlayCardsArea << qpointf_posSix;
 
     QPointF qpointf_posSeven(1025,200);
-    qlist_PlayCardsPos << qpointf_posSeven;
+    qlist_PlayCardsArea << qpointf_posSeven;
 
-    return qlist_PlayCardsPos;
+    return qlist_PlayCardsArea;
 }
 
-QList<PosSizeUpLow> get_CardsInitalPosSizeUpLow( QList<QPointF> qlist_startCardPos, QList<QPointF> qlist_playCardsPos, WidHei widhei_cardSize)
+QList<PosSizeUpLow> get_CardsInitalPosAndSizeAndUpperCardONumAndLowerCardONum( QList<QPointF> qlist_StartCardsArea, QList<QPointF> qlist_PlayCardsArea, WidHei widhei_cardSize)
 {
     QList<PosSizeUpLow> qlist_PosSizeUpLow;
     int int_cardOrderInQlist=0;
 
-    //24 cards have the same inital pos, and the same (upper, lower) = (-1, -1)
-    PosSizeUpLow posSizeUpLow_startArea(qlist_startCardPos[0].x(), qlist_startCardPos[0].y(), widhei_cardSize.int_width , widhei_cardSize.int_height, -1, -1);
+    //24 cards that on qlist_StartCardsArea[0]
+    //have the same inital pos, and the same (upper, lower) = (-1, -1)
+    PosSizeUpLow posSizeUpLow_startArea(qlist_StartCardsArea[0].x(), qlist_StartCardsArea[0].y(), widhei_cardSize.int_width , widhei_cardSize.int_height, -1, -1);
     for(int i=0; i<24; i++)
     {
         qlist_PosSizeUpLow << (posSizeUpLow_startArea);
         int_cardOrderInQlist++;
     }
 
-    //qlist_playCardsPos[0] has 1 card, qlist_playCardsPos[1] has two cards, qlist_playCardsPos[2] has three cars,and so on
+    //qlist_PlayCardsArea[0] has 1 card, qlist_PlayCardsArea[1] has two cards, qlist_PlayCardsArea[2] has three cars,and so on
     int int_up = 0;
     int int_low = 0;
-    for(int i=0; i < qlist_playCardsPos.length(); i++)
+    for(int i=0; i < qlist_PlayCardsArea.length(); i++)
     {
-        PosSizeUpLow posSizeUpLow_playArea(qlist_playCardsPos[i].x(), qlist_playCardsPos[i].y(), widhei_cardSize.int_width , widhei_cardSize.int_height, int_up, int_low);
+        PosSizeUpLow posSizeUpLow_playArea(qlist_PlayCardsArea[i].x(), qlist_PlayCardsArea[i].y(), widhei_cardSize.int_width , widhei_cardSize.int_height, int_up, int_low);
         for(int j=0; j <= i; j++)
         {
             //int_up record previous card order in qlist
@@ -138,12 +133,12 @@ QList<PosSizeUpLow> get_CardsInitalPosSizeUpLow( QList<QPointF> qlist_startCardP
             //int_low record next card order in qlist
             int_low = int_cardOrderInQlist - 1;
             int_cardOrderInQlist++;
-            //first pos of qlist_playCardsPos[i]
+            //first pos of qlist_PlayCardsArea[i]
             if(j == 0)
             {
                 int_low = -1;
             }
-            //last pos of qlist_playCardsPos[i]
+            //last pos of qlist_PlayCardsArea[i]
             if(j == i)
             {
                 int_up = -1;
@@ -196,41 +191,41 @@ QList<SuitAndNumber> get_cardsSuitsAndNumber()
     return qlist_cardsSuitsAndNumber;
 }
 
-QList<QRect> get_cardSitePosAndSize( QList<QPointF> qlist_startCardPos, QList<QPointF> qlist_stackCardsPos, WidHei widhei_cardSize)
+QList<QRect> get_cardSitePosAndSize( QList<QPointF> qlist_StartCardsArea, QList<QPointF> qlist_StackCardsArea, WidHei widhei_cardSize)
 {
     QList<QRect> qlist_posAndsize;
 
-    for(int i=0; i < qlist_startCardPos.length(); i++)
+    for(int i=0; i < qlist_StartCardsArea.length(); i++)
     {
-        QRect qrect_startArea(qlist_startCardPos[i].x(), qlist_startCardPos[i].y(), widhei_cardSize.int_width , widhei_cardSize.int_height);
+        QRect qrect_startArea(qlist_StartCardsArea[i].x(), qlist_StartCardsArea[i].y(), widhei_cardSize.int_width , widhei_cardSize.int_height);
         qlist_posAndsize << (qrect_startArea);
     }
 
-    for(int i=0; i < qlist_stackCardsPos.length(); i++)
+    for(int i=0; i < qlist_StackCardsArea.length(); i++)
     {
-        QRect qrect_stackArea(qlist_stackCardsPos[i].x(), qlist_stackCardsPos[i].y(), widhei_cardSize.int_width , widhei_cardSize.int_height);
+        QRect qrect_stackArea(qlist_StackCardsArea[i].x(), qlist_StackCardsArea[i].y(), widhei_cardSize.int_width , widhei_cardSize.int_height);
         qlist_posAndsize << (qrect_stackArea);
     }
     return qlist_posAndsize;
 }
 
-QList<PosNum> get_PlayCardPosAndNum( QList<QPointF> qlist_allCardPos, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_PlayCardPos)
+QList<PosNum> get_PlayCardPosAndNum( QList<QPointF> qlist_allCardPos, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_PlayCardsArea)
 {
     QList<PosNum> qlist_PlayCardPosAndNum;
     PosNum posnum_temp;
 
-    //intArray_PlaceCardNum recorder card order num that in qlist_cards for 7 PlayCardPos in qlist_PlayCardPos
+    //intArray_PlaceCardNum recorder card order num that in qlist_cards for 7 PlayCardPos in qlist_PlayCardsArea
     int intArray_PlaceCardNum[7];
     //initialize intArray_PlaceCardNum, -1 means no card
     std::fill_n(intArray_PlaceCardNum, 7, -1);
     //initialize qlist_PlayCardPosAndNum
-    for(int i=0; i < qlist_PlayCardPos.length(); i++)
+    for(int i=0; i < qlist_PlayCardsArea.length(); i++)
     {
         posnum_temp.int_cardONum = intArray_PlaceCardNum[i];
-        posnum_temp.qpointf_pos = qlist_PlayCardPos[i];
+        posnum_temp.qpointf_pos = qlist_PlayCardsArea[i];
         qlist_PlayCardPosAndNum << posnum_temp;
     }
-    //record the uppermost card pos in 7 qlist_PlayCardPos
+    //record the uppermost card pos in 7 qlist_PlayCardsArea
     bool bool_NoChosen;
     for(int i=0; i < qlist_allCardPos.length(); i++)
     {

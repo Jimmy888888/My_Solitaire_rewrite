@@ -9,6 +9,9 @@
 #include <iostream>
 #include<fstream>
 #include <string>
+#include <QThread>
+#include <QDebug>
+#include <QLabel>
 
 
 class SuitAndNumber
@@ -71,19 +74,19 @@ bool decide_IsOverlapping(QPointF qpointf_posOne, QPointF qpointf_posTwo);
 
 bool check_mousePosOnArea(QPointF qpointf_mousePos, QPointF qpointf_areaPos);
 
-QList<QPointF> get_StartCardsPos();
+QList<QPointF> get_StartCardsArea ();
 
-QList<QPointF> get_StackCardsPos();
+QList<QPointF> get_StackCardsArea ();
 
-QList<QPointF> get_PlayCardsPos();
+QList<QPointF> get_PlayCardsArea ();
 
-QList<PosSizeUpLow> get_CardsInitalPosSizeUpLow( QList<QPointF> qlist_startCardPos, QList<QPointF> qlist_playCardsPos, WidHei widhei_cardSize);
+QList<PosSizeUpLow> get_CardsInitalPosAndSizeAndUpperCardONumAndLowerCardONum( QList<QPointF> qlist_StartCardsArea, QList<QPointF> qlist_PlayCardsArea, WidHei widhei_cardSize);
 
 QList<SuitAndNumber> get_cardsSuitsAndNumber();
 
-QList<QRect> get_cardSitePosAndSize( QList<QPointF> qlist_startCardPos, QList<QPointF> qlist_stackCardsPos, WidHei widhei_cardSize);
+QList<QRect> get_cardSitePosAndSize( QList<QPointF> qlist_StartCardsArea, QList<QPointF> qlist_StackCardsArea, WidHei widhei_cardSize);
 
-QList<PosNum> get_PlayCardPosAndNum( QList<QPointF> qlist_allCardPos, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_PlayCardPos);
+QList<PosNum> get_PlayCardPosAndNum( QList<QPointF> qlist_allCardPos, QList<int> qlist_MoveAbelCards, QList<QPointF> qlist_PlayCardsArea );
 
 #endif // FREQUENTLY_USED_H
 

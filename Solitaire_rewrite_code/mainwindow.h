@@ -9,6 +9,7 @@
 #include <QPushButton>
 #include <QPixmap>
 #include <QString>
+#include <QDebug>
 
 #include "table.h"
 #include "frequently_used.h"
@@ -24,14 +25,15 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    Table *table_CardTable;
 
 private:
     Ui::MainWindow *ui;
     QPushButton *qbutton_Start;
-    Table *table_CardTable;
 
 private slots:
     void clicked_startButton();
+    void tableClose();
 
 };
 #endif // MAINWINDOW_H

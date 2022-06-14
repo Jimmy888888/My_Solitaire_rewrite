@@ -246,6 +246,7 @@
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/filesystem \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/fstream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/functional \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/future \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/initializer_list \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iomanip \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/ios \
@@ -278,6 +279,7 @@
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/string.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/system_error \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/thread \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/tuple \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/type_traits \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/typeinfo \
@@ -371,10 +373,15 @@
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/xlocale/_time.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include/stdarg.h \
   /Users/kangrenjun/My_Solitaire_rewrite/Solitaire_rewrite_code/frequently_used.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/QDebug \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/QList \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/QObject \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/QPointF \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/QRect \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/QSize \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/QSizeF \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/QString \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/QThread \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/QtGlobal \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qalgorithms.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qanystringview.h \
@@ -396,8 +403,11 @@
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qcontainerinfo.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qcontainertools_impl.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qcontiguouscache.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qcoreevent.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qdatastream.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qdeadlinetimer.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qdebug.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qelapsedtimer.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qflags.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qglobal.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qglobalstatic.h \
@@ -416,6 +426,7 @@
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qmetacontainer.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qmetatype.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qnamespace.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qnativeinterface.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qnumeric.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qobject.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qobject_impl.h \
@@ -423,6 +434,7 @@
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qobjectdefs_impl.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qpair.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qpoint.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qpointer.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qprocessordetection.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qrect.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qrefcount.h \
@@ -447,6 +459,7 @@
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qtaggedpointer.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qtcore-config.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qtextstream.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qthread.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qtmetamacros.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qtypeinfo.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qurl.h \
@@ -454,29 +467,38 @@
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qvariant.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qvarlengtharray.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtCore.framework/Versions/A/Headers/qversiontagging.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/QCloseEvent \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/QPixmap \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/QTransform \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qbitmap.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qbrush.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qcolor.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qcursor.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qevent.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qeventpoint.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qfont.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qfontinfo.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qfontmetrics.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qimage.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qinputdevice.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qkeysequence.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qpaintdevice.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qpalette.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qpicture.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qpixelformat.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qpixmap.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qpointingdevice.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qpolygon.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qregion.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qrgb.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qrgba64.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qscreen.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qtextdocument.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qtgui-config.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qtguiglobal.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qtransform.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qvector2d.h \
+  /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qvectornd.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtGui.framework/Versions/A/Headers/qwindowdefs.h \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtWidgets.framework/Versions/A/Headers/QLabel \
   /Users/kangrenjun/Qt/6.2.4/macos/lib/QtWidgets.framework/Versions/A/Headers/QWidget \

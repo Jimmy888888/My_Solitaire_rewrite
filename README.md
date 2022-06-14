@@ -2,7 +2,7 @@
 ## Description
 
 I done this college independent study when I’m freshman. It’s a Qt c++ program for solitaire poker game.</br>
-I rewirte it on 2022 May. I try to make my code more readable, and make README. 
+I rewirte it on 2022 May. I try to make my code more readable, and make README.</br>
 Hoping I can make my code easy to understand.
 
 ## Software Architecture graph

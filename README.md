@@ -5,7 +5,7 @@ I done this college independent study when I’m freshman. It’s a Qt c++ progr
 I rewirte it on 2022 May. I try to make my code more readable, and make README.</br>
 Hoping I can make my code easy to understand.
 
-## Software Architecture graph
+## Program introduction
 <div align=center><img src="./Readme_graph/classes.jpg" with=630 height=700/></div>
 <div align=center><img src="./Readme_graph/classes_var.jpg" with=630 height=700/></div>
 <div align=center><img src="./Readme_graph/mainwindow_var1.jpg" with=630 height=700/></div>

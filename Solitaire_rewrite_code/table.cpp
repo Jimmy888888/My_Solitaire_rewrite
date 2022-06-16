@@ -498,10 +498,10 @@ void Table::clicked_startButton()
     scoreboard_score = new Scoreboard(int_Club, int_Diamond, int_Spade, int_Heart, int_TotalScore);
     scoreboard_score->show();
     this->setEnabled(false);
-    connect(scoreboard_score, &Scoreboard::close_scoreboard, this, &Table::close_scoreBoard);
+    connect(scoreboard_score, &Scoreboard::close_scoreboard, this, &Table::scoreBoardClose);
 }
 
-void Table::close_scoreBoard()
+void Table::scoreBoardClose()
 {
     this->setEnabled(true);
 }

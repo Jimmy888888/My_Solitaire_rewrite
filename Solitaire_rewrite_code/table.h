@@ -56,7 +56,7 @@ private:
 
 private slots:
     void clicked_startButton();
-    void close_scoreBoard();
+    void scoreBoardClose();
 
 signals:
     void close_table();

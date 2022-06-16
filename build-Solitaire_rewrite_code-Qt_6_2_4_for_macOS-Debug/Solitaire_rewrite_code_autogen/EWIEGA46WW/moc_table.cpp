@@ -24,7 +24,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Table_t {
     const uint offsetsAndSize[10];
-    char stringdata0[56];
+    char stringdata0[55];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_Table_t, stringdata0) + ofs), len 
@@ -34,11 +34,11 @@ QT_MOC_LITERAL(0, 5), // "Table"
 QT_MOC_LITERAL(6, 11), // "close_table"
 QT_MOC_LITERAL(18, 0), // ""
 QT_MOC_LITERAL(19, 19), // "clicked_startButton"
-QT_MOC_LITERAL(39, 16) // "close_scoreBoard"
+QT_MOC_LITERAL(39, 15) // "scoreBoardClose"
 
     },
     "Table\0close_table\0\0clicked_startButton\0"
-    "close_scoreBoard"
+    "scoreBoardClose"
 };
 #undef QT_MOC_LITERAL
 
@@ -80,7 +80,7 @@ void Table::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         switch (_id) {
         case 0: _t->close_table(); break;
         case 1: _t->clicked_startButton(); break;
-        case 2: _t->close_scoreBoard(); break;
+        case 2: _t->scoreBoardClose(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

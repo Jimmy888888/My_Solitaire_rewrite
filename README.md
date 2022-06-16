@@ -5,7 +5,8 @@ I done this college independent study when I’m freshman. It’s a Qt c++ progr
 I rewirte it on 2022 May. I try to make my code has more readability. Make functions high Cohesion, low Coupling. </br>
 Hoping I can make my code easy to understand, and easy to debug.
 
-##Development tool
+## Development tool
+
 Mac os, Qt Creator 6.2.4
 
 ## Program introduction

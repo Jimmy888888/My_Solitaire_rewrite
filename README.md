@@ -2,8 +2,9 @@
 ## Description
 
 I done this college independent study when I’m freshman. It’s a Qt c++ program for solitaire poker game.</br>
-I rewirte it on 2022 May. I try to make my code more readable, and make README.</br>
+I rewirte it on 2022 May. I try to make my code has more readability.</br>
 Hoping I can make my code easy to understand.
+Modular design
 
 ## Program introduction
 <div align=center><img src="./Readme_graph/classes.jpg" with=630 height=700/></div>

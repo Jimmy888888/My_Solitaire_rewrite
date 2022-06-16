@@ -2,9 +2,9 @@
 ## Description
 
 I done this college independent study when I’m freshman. It’s a Qt c++ program for solitaire poker game.</br>
-I rewirte it on 2022 May. I try to make my code has more readability.</br>
-Hoping I can make my code easy to understand.
-Modular design
+I rewirte it on 2022 May. I try to make my code has more readability. Make functions high Cohesion, low Coupling. </br>
+Hoping I can make my code easy to understand, and easy to debug.
+
 
 ## Program introduction
 <div align=center><img src="./Readme_graph/programFlowChart.jpg" with=630 height=700/></div>

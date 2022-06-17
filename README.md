@@ -3,7 +3,7 @@
 
 I done this college independent study when I’m freshman. It’s a Qt c++ program for solitaire poker game.</br>
 I rewirte it on 2022 May. I try to make my code has more readability. Make functions high Cohesion, low Coupling. </br>
-Hoping I can make my code easy to understand, and easy to debug.
+I'm still learning. Hoping I can make my code easy to understand, and easy to debug.
 
 ## Development tool
 
